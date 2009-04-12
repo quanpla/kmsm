@@ -57,23 +57,24 @@
     <Compile Include="class\GlobalClass.vb" />
     <Compile Include="class\LoginClass.vb" />
     <Compile Include="class\ValidationClass.vb" />
-    <Compile Include="Main.vb">
+    <Compile Include="globalModule.vb" />
+    <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.vb">
-      <DependentUpon>Main.vb</DependentUpon>
+    <Compile Include="frmMain.Designer.vb">
+      <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.vb">
-      <DependentUpon>Login.vb</DependentUpon>
+    <Compile Include="frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="Login.vb">
+    <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManageUser.Designer.vb">
-      <DependentUpon>ManageUser.vb</DependentUpon>
+    <Compile Include="frmManageUser.Designer.vb">
+      <DependentUpon>frmManageUser.vb</DependentUpon>
     </Compile>
-    <Compile Include="ManageUser.vb">
+    <Compile Include="frmManageUser.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -93,17 +94,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="frmLogin.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Login.vb</DependentUpon>
+      <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="frmMain.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Main.vb</DependentUpon>
+      <DependentUpon>frmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManageUser.resx">
+    <EmbeddedResource Include="frmManageUser.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ManageUser.vb</DependentUpon>
+      <DependentUpon>frmManageUser.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

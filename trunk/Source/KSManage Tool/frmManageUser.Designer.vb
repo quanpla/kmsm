@@ -1,5 +1,5 @@
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ManageUser
+Partial Class frmManageUser
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.

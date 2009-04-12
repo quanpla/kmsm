@@ -1,0 +1,10 @@
+bin\Debug\KSM Admin Tool.exe
+bin\Debug\KSM Admin Tool.pdb
+bin\Debug\KSM Admin Tool.xml
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\KSM_Admin_Tool.Form1.resources
+obj\Debug\KSM_Admin_Tool.Resources.resources
+obj\Debug\KSM Admin Tool.vbproj.GenerateResource.Cache
+obj\Debug\KSM Admin Tool.exe
+obj\Debug\KSM Admin Tool.xml
+obj\Debug\KSM Admin Tool.pdb
