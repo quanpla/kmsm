@@ -8,23 +8,33 @@ Public Class DatabaseClass
     Public dataRead As System.Data.SqlClient.SqlDataReader
     Public dataSet As System.Data.DataSet
     Public dataAdapter As System.Data.SqlClient.SqlDataAdapter
-    Public strConnectionString As String = My.Settings.connectionStr
+    Public strConnectionString As String = strConn
 
     Public Sub New(Optional ByVal ConnectString As String = "")
         MyBase.new()
     End Sub
-    Public Sub ConnectData()
-        If dataConn Is Nothing Then dataConn = New System.Data.SqlClient.SqlConnection
-        If dataConn.State = System.Data.ConnectionState.Closed Then
-            dataConn.ConnectionString = vbNullString
-            dataConn.ConnectionString = strConnectionString
-            dataConn.Open()
-        End If
 
-        If dataComm Is Nothing Then dataComm = New System.Data.SqlClient.SqlCommand
-        dataComm.Connection = dataConn
-        dataComm.CommandTimeout = 20
-        dataComm.CommandType = CommandType.Text
+    Function checkConnection() As Boolean
+        ConnectData()
+        Return dataConn.State = ConnectionState.Open
+        CloseData()
+    End Function
+
+    Public Sub ConnectData()
+        Try
+            If dataConn Is Nothing Then dataConn = New System.Data.SqlClient.SqlConnection
+            If dataConn.State = System.Data.ConnectionState.Closed Then
+                dataConn.ConnectionString = vbNullString
+                dataConn.ConnectionString = strConnectionString
+                dataConn.Open()
+            End If
+            If dataComm Is Nothing Then dataComm = New System.Data.SqlClient.SqlCommand
+            dataComm.Connection = dataConn
+            dataComm.CommandTimeout = 20
+            dataComm.CommandType = CommandType.Text
+        Catch ex As Exception
+        End Try
+
     End Sub
     Public Sub CloseData()
         If Not dataRead Is Nothing Then dataRead.Close()
@@ -47,14 +57,6 @@ Public Class DatabaseClass
         dataComm.CommandText = strQuery
         dataRead = dataComm.ExecuteReader()
     End Sub
-
-    'run ExecuteScalar
-    Public Function ExeScalar(ByVal strQuery As String) As Object
-        If dataConn Is Nothing Then Call ConnectData()
-        If Not dataRead Is Nothing Then dataRead.Close()
-        dataComm.CommandText = strQuery
-        Return dataComm.ExecuteScalar()
-    End Function
 
     Public Function ExeDataset(ByVal strQuery As String) As System.Data.DataSet
         If dataConn Is Nothing Then Call ConnectData()

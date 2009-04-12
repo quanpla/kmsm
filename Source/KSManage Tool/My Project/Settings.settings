@@ -2,8 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="connectionStr" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data Source=192.168.0.13;Initial Catalog=csdl_qlks;Persist Security Info=True;User ID=sa</Value>
+    <Setting Name="connectionStr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=192.168.0.13;Initial Catalog=csdl_qlks;Persist Security Info=True;</Value>
+    </Setting>
+    <Setting Name="lastuser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

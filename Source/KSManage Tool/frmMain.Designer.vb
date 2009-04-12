@@ -20,14 +20,14 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Empty"}, 2, System.Drawing.Color.Empty, System.Drawing.SystemColors.Window, Nothing)
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer went out", 1)
-        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer in", 3)
-        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Checking out", 0)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Empty"}, 2, System.Drawing.Color.Empty, System.Drawing.SystemColors.Window, Nothing)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer went out", 1)
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer in", 3)
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Checking out", 0)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.Label1 = New System.Windows.Forms.Label
         Me.Button1 = New System.Windows.Forms.Button
-        Me.ListView1 = New System.Windows.Forms.ListView
+        Me.lstRoom = New System.Windows.Forms.ListView
         Me.imgl_RoomStatus = New System.Windows.Forms.ImageList(Me.components)
         Me.Button2 = New System.Windows.Forms.Button
         Me.Clock1 = New AnalogClock.Clock
@@ -35,6 +35,13 @@ Partial Class frmMain
         Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader
         Me.ListView3 = New System.Windows.Forms.ListView
         Me.lblDate = New System.Windows.Forms.Label
+        Me.cMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnu_Checkin = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnu_Checkout = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnu_ChangeRoom = New System.Windows.Forms.ToolStripMenuItem
+        Me.Room01ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.Room02ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.cMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -55,27 +62,27 @@ Partial Class frmMain
         Me.Button1.Text = "Logout/ Switch User"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'ListView1
+        'lstRoom
         '
-        Me.ListView1.Alignment = System.Windows.Forms.ListViewAlignment.[Default]
-        Me.ListView1.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
-        Me.ListView1.LargeImageList = Me.imgl_RoomStatus
-        Me.ListView1.Location = New System.Drawing.Point(3, 4)
-        Me.ListView1.MultiSelect = False
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.ShowGroups = False
-        Me.ListView1.Size = New System.Drawing.Size(527, 565)
-        Me.ListView1.TabIndex = 3
-        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.lstRoom.Alignment = System.Windows.Forms.ListViewAlignment.[Default]
+        Me.lstRoom.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4})
+        Me.lstRoom.LargeImageList = Me.imgl_RoomStatus
+        Me.lstRoom.Location = New System.Drawing.Point(3, 4)
+        Me.lstRoom.MultiSelect = False
+        Me.lstRoom.Name = "lstRoom"
+        Me.lstRoom.ShowGroups = False
+        Me.lstRoom.Size = New System.Drawing.Size(527, 565)
+        Me.lstRoom.TabIndex = 3
+        Me.lstRoom.UseCompatibleStateImageBehavior = False
         '
         'imgl_RoomStatus
         '
         Me.imgl_RoomStatus.ImageStream = CType(resources.GetObject("imgl_RoomStatus.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.imgl_RoomStatus.TransparentColor = System.Drawing.Color.Transparent
-        Me.imgl_RoomStatus.Images.SetKeyName(0, "checkout.png")
-        Me.imgl_RoomStatus.Images.SetKeyName(1, "customerout.png")
-        Me.imgl_RoomStatus.Images.SetKeyName(2, "empty.png")
-        Me.imgl_RoomStatus.Images.SetKeyName(3, "withcustomer.png")
+        Me.imgl_RoomStatus.Images.SetKeyName(0, "0_default.png")
+        Me.imgl_RoomStatus.Images.SetKeyName(1, "1_available.png")
+        Me.imgl_RoomStatus.Images.SetKeyName(2, "2_inused.png")
+        Me.imgl_RoomStatus.Images.SetKeyName(3, "3_disabled.png")
         '
         'Button2
         '
@@ -140,6 +147,44 @@ Partial Class frmMain
         Me.lblDate.Text = "Label2"
         Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'cMenu
+        '
+        Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnu_Checkin, Me.mnu_Checkout, Me.mnu_ChangeRoom})
+        Me.cMenu.Name = "cMenu"
+        Me.cMenu.Size = New System.Drawing.Size(153, 92)
+        '
+        'mnu_Checkin
+        '
+        Me.mnu_Checkin.Name = "mnu_Checkin"
+        Me.mnu_Checkin.Size = New System.Drawing.Size(152, 22)
+        Me.mnu_Checkin.Text = "Check In"
+        Me.mnu_Checkin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'mnu_Checkout
+        '
+        Me.mnu_Checkout.Name = "mnu_Checkout"
+        Me.mnu_Checkout.Size = New System.Drawing.Size(152, 22)
+        Me.mnu_Checkout.Text = "Check Out"
+        '
+        'mnu_ChangeRoom
+        '
+        Me.mnu_ChangeRoom.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Room01ToolStripMenuItem, Me.Room02ToolStripMenuItem})
+        Me.mnu_ChangeRoom.Name = "mnu_ChangeRoom"
+        Me.mnu_ChangeRoom.Size = New System.Drawing.Size(152, 22)
+        Me.mnu_ChangeRoom.Text = "Change Room"
+        '
+        'Room01ToolStripMenuItem
+        '
+        Me.Room01ToolStripMenuItem.Name = "Room01ToolStripMenuItem"
+        Me.Room01ToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.Room01ToolStripMenuItem.Text = "Room 01"
+        '
+        'Room02ToolStripMenuItem
+        '
+        Me.Room02ToolStripMenuItem.Name = "Room02ToolStripMenuItem"
+        Me.Room02ToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.Room02ToolStripMenuItem.Text = "Room 02"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -148,7 +193,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.Clock1)
         Me.Controls.Add(Me.ListView3)
-        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.lstRoom)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -157,13 +202,14 @@ Partial Class frmMain
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "KSManage Tool"
+        Me.cMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents lstRoom As System.Windows.Forms.ListView
     Friend WithEvents imgl_RoomStatus As System.Windows.Forms.ImageList
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Clock1 As AnalogClock.Clock
@@ -171,5 +217,11 @@ Partial Class frmMain
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ListView3 As System.Windows.Forms.ListView
     Friend WithEvents lblDate As System.Windows.Forms.Label
+    Friend WithEvents cMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents mnu_Checkin As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnu_Checkout As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnu_ChangeRoom As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Room01ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Room02ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

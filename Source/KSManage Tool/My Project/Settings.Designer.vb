@@ -54,14 +54,28 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.0.13;Initial Catalog=csdl_qlks;Persist Security Info=True;Use"& _ 
-            "r ID=sa")>  _
-        Public ReadOnly Property connectionStr() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.0.13;Initial Catalog=csdl_qlks;Persist Security Info=True;")>  _
+        Public Property connectionStr() As String
             Get
                 Return CType(Me("connectionStr"),String)
             End Get
+            Set
+                Me("connectionStr") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property lastuser() As String
+            Get
+                Return CType(Me("lastuser"),String)
+            End Get
+            Set
+                Me("lastuser") = value
+            End Set
         End Property
     End Class
 End Namespace
