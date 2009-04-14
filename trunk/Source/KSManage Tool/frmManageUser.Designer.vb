@@ -20,11 +20,11 @@ Partial Class frmManageUser
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lstUsers = New System.Windows.Forms.ListView
+        Me.colUsername = New System.Windows.Forms.ColumnHeader
+        Me.colRole = New System.Windows.Forms.ColumnHeader
         Me.Button1 = New System.Windows.Forms.Button
         Me.Button2 = New System.Windows.Forms.Button
         Me.Button3 = New System.Windows.Forms.Button
-        Me.colUsername = New System.Windows.Forms.ColumnHeader
-        Me.colRole = New System.Windows.Forms.ColumnHeader
         Me.SuspendLayout()
         '
         'lstUsers
@@ -32,37 +32,10 @@ Partial Class frmManageUser
         Me.lstUsers.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colUsername, Me.colRole})
         Me.lstUsers.Location = New System.Drawing.Point(2, 1)
         Me.lstUsers.Name = "lstUsers"
-        Me.lstUsers.Size = New System.Drawing.Size(258, 232)
+        Me.lstUsers.Size = New System.Drawing.Size(258, 215)
         Me.lstUsers.TabIndex = 0
         Me.lstUsers.UseCompatibleStateImageBehavior = False
         Me.lstUsers.View = System.Windows.Forms.View.Details
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(2, 239)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(82, 32)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(90, 239)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(82, 32)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Button1"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(178, 239)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(82, 32)
-        Me.Button3.TabIndex = 1
-        Me.Button3.Text = "Button1"
-        Me.Button3.UseVisualStyleBackColor = True
         '
         'colUsername
         '
@@ -73,7 +46,34 @@ Partial Class frmManageUser
         Me.colRole.Text = "Role"
         Me.colRole.Width = 180
         '
-        'ManageUser
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(2, 222)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(82, 49)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "New"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(90, 222)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(82, 49)
+        Me.Button2.TabIndex = 2
+        Me.Button2.Text = "Change pw"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(178, 222)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(82, 49)
+        Me.Button3.TabIndex = 3
+        Me.Button3.Text = "Delete"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'frmManageUser
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -82,7 +82,7 @@ Partial Class frmManageUser
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.lstUsers)
-        Me.Name = "ManageUser"
+        Me.Name = "frmManageUser"
         Me.Text = "ManageUser"
         Me.ResumeLayout(False)
 

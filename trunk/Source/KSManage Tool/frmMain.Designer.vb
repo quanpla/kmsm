@@ -26,12 +26,11 @@ Partial Class frmMain
         Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Checking out", 0)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.Label1 = New System.Windows.Forms.Label
-        Me.Button1 = New System.Windows.Forms.Button
+        Me.btn_Logout = New System.Windows.Forms.Button
         Me.lstRoom = New System.Windows.Forms.ListView
         Me.imgl_RoomStatus = New System.Windows.Forms.ImageList(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button
+        Me.btn_ManageUser = New System.Windows.Forms.Button
         Me.Clock1 = New AnalogClock.Clock
-        Me.Button3 = New System.Windows.Forms.Button
         Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader
         Me.ListView3 = New System.Windows.Forms.ListView
         Me.lblDate = New System.Windows.Forms.Label
@@ -53,14 +52,14 @@ Partial Class frmMain
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Current Login as"
         '
-        'Button1
+        'btn_Logout
         '
-        Me.Button1.Location = New System.Drawing.Point(536, 315)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(84, 46)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Logout/ Switch User"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btn_Logout.Location = New System.Drawing.Point(536, 315)
+        Me.btn_Logout.Name = "btn_Logout"
+        Me.btn_Logout.Size = New System.Drawing.Size(125, 46)
+        Me.btn_Logout.TabIndex = 2
+        Me.btn_Logout.Text = "Logout/ Switch User"
+        Me.btn_Logout.UseVisualStyleBackColor = True
         '
         'lstRoom
         '
@@ -84,14 +83,14 @@ Partial Class frmMain
         Me.imgl_RoomStatus.Images.SetKeyName(2, "2_inused.png")
         Me.imgl_RoomStatus.Images.SetKeyName(3, "3_disabled.png")
         '
-        'Button2
+        'btn_ManageUser
         '
-        Me.Button2.Location = New System.Drawing.Point(626, 315)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 46)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Manage User"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btn_ManageUser.Location = New System.Drawing.Point(667, 315)
+        Me.btn_ManageUser.Name = "btn_ManageUser"
+        Me.btn_ManageUser.Size = New System.Drawing.Size(123, 46)
+        Me.btn_ManageUser.TabIndex = 2
+        Me.btn_ManageUser.Text = "Manage User"
+        Me.btn_ManageUser.UseVisualStyleBackColor = True
         '
         'Clock1
         '
@@ -114,15 +113,6 @@ Partial Class frmMain
         Me.Clock1.Symbols = New AnalogClock.Symbol() {New AnalogClock.Symbol("Symbol90", 90.0!, "12", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 0, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol60", 60.0!, "1", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 1, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol30", 30.0!, "2", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 2, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol0", 0.0!, "3", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 3, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol330", 330.0!, "4", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 4, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol300", 300.0!, "5", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 5, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol270", 270.0!, "6", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 6, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol240", 240.0!, "7", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 7, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol210", 210.0!, "8", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 8, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol180", 180.0!, "9", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 9, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol150", 150.0!, "10", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 10, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault), New AnalogClock.Symbol("Symbol120", 120.0!, "11", New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold), System.Drawing.Color.Black, New System.Drawing.Point(1, 1), 11, True, True, AnalogClock.SymbolStyle.Numeric, 126.0!, 0.82!, System.Drawing.Text.TextRenderingHint.SystemDefault)}
         Me.Clock1.TabIndex = 5
         Me.Clock1.UtcOffset = System.TimeSpan.Parse("07:00:00")
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(707, 315)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(83, 46)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Logout/ Switch User"
-        Me.Button3.UseVisualStyleBackColor = True
         '
         'ColumnHeader1
         '
@@ -151,26 +141,26 @@ Partial Class frmMain
         '
         Me.cMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnu_Checkin, Me.mnu_Checkout, Me.mnu_ChangeRoom})
         Me.cMenu.Name = "cMenu"
-        Me.cMenu.Size = New System.Drawing.Size(153, 92)
+        Me.cMenu.Size = New System.Drawing.Size(142, 70)
         '
         'mnu_Checkin
         '
         Me.mnu_Checkin.Name = "mnu_Checkin"
-        Me.mnu_Checkin.Size = New System.Drawing.Size(152, 22)
+        Me.mnu_Checkin.Size = New System.Drawing.Size(141, 22)
         Me.mnu_Checkin.Text = "Check In"
         Me.mnu_Checkin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'mnu_Checkout
         '
         Me.mnu_Checkout.Name = "mnu_Checkout"
-        Me.mnu_Checkout.Size = New System.Drawing.Size(152, 22)
+        Me.mnu_Checkout.Size = New System.Drawing.Size(141, 22)
         Me.mnu_Checkout.Text = "Check Out"
         '
         'mnu_ChangeRoom
         '
         Me.mnu_ChangeRoom.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Room01ToolStripMenuItem, Me.Room02ToolStripMenuItem})
         Me.mnu_ChangeRoom.Name = "mnu_ChangeRoom"
-        Me.mnu_ChangeRoom.Size = New System.Drawing.Size(152, 22)
+        Me.mnu_ChangeRoom.Size = New System.Drawing.Size(141, 22)
         Me.mnu_ChangeRoom.Text = "Change Room"
         '
         'Room01ToolStripMenuItem
@@ -194,9 +184,8 @@ Partial Class frmMain
         Me.Controls.Add(Me.Clock1)
         Me.Controls.Add(Me.ListView3)
         Me.Controls.Add(Me.lstRoom)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btn_Logout)
+        Me.Controls.Add(Me.btn_ManageUser)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmMain"
@@ -208,12 +197,11 @@ Partial Class frmMain
 
     End Sub
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents btn_Logout As System.Windows.Forms.Button
     Friend WithEvents lstRoom As System.Windows.Forms.ListView
     Friend WithEvents imgl_RoomStatus As System.Windows.Forms.ImageList
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btn_ManageUser As System.Windows.Forms.Button
     Friend WithEvents Clock1 As AnalogClock.Clock
-    Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     Friend WithEvents ListView3 As System.Windows.Forms.ListView
     Friend WithEvents lblDate As System.Windows.Forms.Label

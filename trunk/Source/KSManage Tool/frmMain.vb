@@ -122,9 +122,10 @@ Public Class frmMain
         If MsgBox("Ban co muon CheckOut hay khong?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             Try
                 Dim dt As DataTable = dbc.ExeDataset("exec dbo.Checkout '" & lstRoom.SelectedItems(0).SubItems("ID").Text & "'").Tables(0)
+                Dim result As String = dt.Rows(0)(0).ToString
                 If dt.Rows.Count > 0 Then
                     If MsgBox("In hoa don voi don gia: " & dt.Rows(0)("Thanh Tien").ToString, MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                        printReceipt()
+                        printReceipt(lstRoom.SelectedItems(0).SubItems("ID").Text, dt.Rows(0)(0).ToString, dt.Rows(0)(1).ToString, dt.Rows(0)(2).ToString)
                     End If
                 End If
             Catch ex As Exception
@@ -144,7 +145,17 @@ Public Class frmMain
         UpdateConntextMenu()
     End Sub
 
-    Private Sub printReceipt()
+    Private Sub printReceipt(ByVal ID As String, ByVal starttime As String, ByVal endtime As String, ByVal pricerate As String)
+        Try
+            Dim strPrint As String = dbc.ExeDataset("exec dbo.get_AppPrintableBill " & ID & ",'" & starttime & "','" & endtime & "'," & pricerate).Tables(0).Rows(0)(0).ToString
+            strPrint = strPrint.Replace("\", vbCrLf)
+
+            Dim prt As New TextPrint(strPrint)
+            prt.Font = New Font("Tahoma", 8)
+            prt.Print()
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 
@@ -156,7 +167,7 @@ Public Class frmMain
                 Case "addRoom"
                     act_addRoom()
                 Case "delRoom"
-                    act_addRoom()
+                    act_delRoom()
                 Case "chkIn"
                     act_chkIn()
                 Case "chkOut"
@@ -165,5 +176,19 @@ Public Class frmMain
         Catch ex As Exception
         End Try
 
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_Logout.Click
+        Me.Hide()
+        frmLogin.Show()
+    End Sub
+
+    Private Sub frmMain_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        frmLogin.Show()
+    End Sub
+
+    Private Sub btn_ManageUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_ManageUser.Click
+        Me.Hide()
+        frmManageUser.Show()
     End Sub
 End Class
