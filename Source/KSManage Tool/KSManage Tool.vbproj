@@ -56,6 +56,9 @@
     <Compile Include="class\DatabaseClass.vb" />
     <Compile Include="class\GlobalClass.vb" />
     <Compile Include="class\LoginClass.vb" />
+    <Compile Include="class\textPrint.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="class\ValidationClass.vb" />
     <Compile Include="globalModule.vb" />
     <Compile Include="frmMain.vb">
