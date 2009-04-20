@@ -1,9 +1,10 @@
 Public Class frmManageUser
     Dim dbc As DatabaseClass
+    Dim dt As New DataTable
     Dim bln_IsManager As Boolean = False
     Private Sub UpdateList()
         lstUsers.Items.Clear()
-
+        dt = dbc.ExeDataset("exec dbo.get_ListUser").Tables(0)
     End Sub
 
     Private Sub frmManageUser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

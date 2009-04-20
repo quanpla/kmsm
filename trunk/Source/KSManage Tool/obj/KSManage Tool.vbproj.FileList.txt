@@ -13,3 +13,18 @@ obj\Debug\KSManage Tool.vbproj.GenerateResource.Cache
 obj\Debug\KSManage Tool.exe
 obj\Debug\KSManage Tool.xml
 obj\Debug\KSManage Tool.pdb
+bin\Release\KSManage Tool.exe.config
+bin\Release\AnalogClockControl.dll
+bin\Release\KSManage Tool.exe
+bin\Release\KSManage Tool.pdb
+bin\Release\KSManage Tool.xml
+bin\Release\AnalogClockControl.xml
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\KSManage_Tool.frmLogin.resources
+obj\Release\KSManage_Tool.frmMain.resources
+obj\Release\KSManage_Tool.frmManageUser.resources
+obj\Release\KSManage_Tool.Resources.resources
+obj\Release\KSManage Tool.vbproj.GenerateResource.Cache
+obj\Release\KSManage Tool.exe
+obj\Release\KSManage Tool.xml
+obj\Release\KSManage Tool.pdb

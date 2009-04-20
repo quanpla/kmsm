@@ -1,0 +1,55 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+KSManageTool
+</name>
+</assembly>
+<members>
+<member name="M:KSManage_Tool.ValidationClass.validateNull(System.Collections.ArrayList,System.Collections.ArrayList,System.String)">
+	<summary>
+ Using to validate Null
+ </summary>
+	<param name="arrTextBox">array list of TextBox</param>
+	<param name="arrLabel">array list of Label show validation Message</param>
+	<param name="strMessgeToShow">Message to show validation Message</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:KSManage_Tool.ValidationClass.validateNumber(System.Collections.ArrayList,System.Collections.ArrayList,System.String)">
+	<summary>
+ Using to validate Number
+ </summary>
+	<param name="arrTextBox">array list of TextBox</param>
+	<param name="arrLabel">array list of Label show validation Message</param>
+	<param name="strMessgeToShow">Message to show validation Message</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:KSManage_Tool.ValidationClass.validateDateStringByStringFormat(System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="strInputDateString">type string: input date string</param>
+	<param name="strDateFormat">type string: date format to validate</param>
+	<returns>type bool: true if date input valid, else return false</returns>
+</member><member name="P:KSManage_Tool.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:KSManage_Tool.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:KSManage_Tool.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:KSManage_Tool.GlobalClass.convertDate(System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="strDateValue"></param>
+	<param name="strCurrentDateFormat"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
