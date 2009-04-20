@@ -107,11 +107,6 @@
             "AssemblyAsmDisplayName" = "8:AnalogClockControl, Version=1.5.0.2, Culture=neutral, PublicKeyToken=dab8dfbe0d581654, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D78104C2790EEF5C477A9187395C42A8"
-                    {
-                    "Name" = "8:AnalogClockControl.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:AnalogClockControl.dll"
             "TargetName" = "8:"
@@ -187,7 +182,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:KMS Setup"
         "ProductCode" = "8:{652FAA19-619E-446D-BC8A-32415D67A135}"
-        "PackageCode" = "8:{F40BB24A-E391-4289-94BA-C1606365758B}"
+        "PackageCode" = "8:{F7A8D3F3-161A-4A1A-B1BF-D1706B2EBEFF}"
         "UpgradeCode" = "8:{41A044E2-8532-4E61-8340-F4A517D4CACD}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -306,6 +301,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_06F53D7D76884A99B8C2419A8AB08C04"
+            {
+            "Name" = "8:Shortcut to User's Programs Menu"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_96251430B5C74966955B3ABDC2840E98"
+            "Folder" = "8:_96251430B5C74966955B3ABDC2840E98"
+            "WorkingFolder" = "8:_96251430B5C74966955B3ABDC2840E98"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C5A6C478D6374C5B9CB4BB5354D48549"
+            {
+            "Name" = "8:Shortcut to User's Desktop"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_73B2FE51BE4D4716A937F8924ECD6AD4"
+            "Folder" = "8:_73B2FE51BE4D4716A937F8924ECD6AD4"
+            "WorkingFolder" = "8:_73B2FE51BE4D4716A937F8924ECD6AD4"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
