@@ -32,7 +32,6 @@
 
 Imports Microsoft.VisualBasic
 
-
 Public Class CoreClass
 #Region "Declare Value"
     Public objData As New DatabaseClass()

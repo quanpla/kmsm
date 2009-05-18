@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("KSManage Tool")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Q3 - Home")> 
+<Assembly: AssemblyDescription("The tool to Manage Check In/ Check Out for a motel")> 
+<Assembly: AssemblyCompany("q3home")> 
 <Assembly: AssemblyProduct("KSManage Tool")> 
-<Assembly: AssemblyCopyright("Copyright © Q3 - Home 2009")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyCopyright("Copyright © Q3home - Home 2009")> 
+<Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 

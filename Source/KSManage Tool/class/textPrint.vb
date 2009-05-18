@@ -9,6 +9,7 @@ Public Class TextPrint
         MyBase.New()
         strText = Text
     End Sub
+
     Public Property Text() As String
         Get
             Return strText
@@ -17,6 +18,7 @@ Public Class TextPrint
             strText = Value
         End Set
     End Property
+
     Protected Overrides Sub OnBeginPrint(ByVal ev _
                                 As Printing.PrintEventArgs)
         ' Run base code
@@ -26,6 +28,7 @@ Public Class TextPrint
             fntPrintFont = New Font("Times New Roman", 12)
         End If
     End Sub
+
     Public Property Font() As Font
         ' Allows the user to override the default font
         Get
@@ -35,6 +38,7 @@ Public Class TextPrint
             fntPrintFont = Value
         End Set
     End Property
+
     Protected Overrides Sub OnPrintPage(ByVal ev _
        As Printing.PrintPageEventArgs)
         ' Provides the print logic for our document
