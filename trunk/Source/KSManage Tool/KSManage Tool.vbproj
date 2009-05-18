@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{70A3AFEC-327E-4B35-9468-9F0982664CC8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>KSManage_Tool.My.MyApplication</StartupObject>
-    <RootNamespace>KSManage_Tool</RootNamespace>
+    <StartupObject>q3main.Applications.KSManageTool.My.MyApplication</StartupObject>
+    <RootNamespace>q3main.Applications.KSManageTool</RootNamespace>
     <AssemblyName>KSManage Tool</AssemblyName>
     <MyType>WindowsForms</MyType>
   </PropertyGroup>
@@ -60,6 +60,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="class\ValidationClass.vb" />
+    <Compile Include="frmExtraFee.Designer.vb">
+      <DependentUpon>frmExtraFee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmExtraFee.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="globalModule.vb" />
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
@@ -72,6 +78,7 @@
       <DependentUpon>frmLogin.vb</DependentUpon>
     </Compile>
     <Compile Include="frmLogin.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmManageUser.Designer.vb">
       <DependentUpon>frmManageUser.vb</DependentUpon>
@@ -94,8 +101,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmExtraFee.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmExtraFee.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmLogin.vb</DependentUpon>

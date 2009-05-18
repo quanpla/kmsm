@@ -1,15 +1,15 @@
 Imports Microsoft.VisualBasic
 
-
-
 Public Class GlobalClass
 
+#Region "Constant"
 
+#End Region
 
 #Region "Convert DateTime"
 
     ''' <summary>
-    ''' 
+    ''' Convert date to string
     ''' </summary>
     ''' <param name="strDateValue"></param>
     ''' <param name="strCurrentDateFormat"></param>
@@ -27,4 +27,5 @@ Public Class GlobalClass
 
     End Function
 #End Region
+
 End Class
