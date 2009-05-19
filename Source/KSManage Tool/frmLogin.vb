@@ -11,7 +11,7 @@ Public Class frmLogin
         strPassword = txtPassword.Text.Trim().Trim("'").Trim(" ")
 
         ' Form the connection
-        strConn = strConn & "User ID=" & strUserName & ";Password=" & strPassword
+        strConn = My.Settings.connectionStr & "User ID=" & strUserName & ";Password=" & strPassword
 
         ' Try to connect
         Dim db As New DatabaseClass
@@ -27,6 +27,7 @@ Public Class frmLogin
 
             ' Clear password text
             txtPassword.Text = ""
+            userlogin = strUserName
 
             ' Hide this form
             Me.Hide()
