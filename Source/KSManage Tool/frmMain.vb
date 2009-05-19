@@ -196,6 +196,79 @@ Public Class frmMain
         Updatelist()
     End Sub
 
+#Region "Print Task"
+    ''' <summary>
+    ''' Send a string to printer
+    ''' </summary>
+    ''' <param name="str"></param>
+    ''' <remarks></remarks>
+    Private Sub printString(ByVal str As String)
+        Try
+            str = str.Replace("\", vbCrLf)
+            Dim prt As New TextPrint(str)
+            prt.Font = New Font("Tahoma", 8)
+            prt.Print()
+        Catch ex As Exception
+            RaiseError("Loi in an.", ex)
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Print The receipt. It's a normal task
+    ''' </summary>
+    ''' <param name="ID"></param>
+    ''' <param name="starttime"></param>
+    ''' <param name="endtime"></param>
+    ''' <param name="pricerate"></param>
+    ''' <remarks></remarks>
+    Private Sub printReceipt(ByVal ID As String, ByVal starttime As String, ByVal endtime As String, ByVal pricerate As String)
+        Dim strprint As String = String.Empty
+        Try
+            strprint = dbc.ExeDataset("exec dbo.get_AppPrintableBill " & ID & ",'" & starttime & "','" & endtime & "'," & pricerate).Tables(0).Rows(0)(0).ToString
+        Catch ex As Exception
+            RaiseError("Loi truy van!", ex)
+        End Try
+        If (strprint <> String.Empty) Then
+            printString(strprint)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Print room info. It's normal task
+    ''' </summary>
+    ''' <param name="ID">Room ID</param>
+    ''' <remarks></remarks>
+    Private Sub printInfo(ByVal ID As String)
+        Dim strprint As String = String.Empty
+        Try
+            strprint = dbc.ExeDataset("exec dbo.get_AppPrintableInfo " & ID & "'").Tables(0).Rows(0)(0).ToString
+        Catch ex As Exception
+            RaiseError("Loi truy van!", ex)
+        End Try
+        If (strprint <> String.Empty) Then
+            printString(strprint)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Print room history. It's admin task
+    ''' </summary>
+    ''' <param name="ID">Room ID</param>
+    ''' <remarks></remarks>
+    Private Sub printHist(ByVal ID As String, ByVal StartTime As String, ByVal EndTime As String)
+        Dim strprint As String = String.Empty
+        Try
+            strprint = dbc.ExeDataset("exec dbo.get_AppPrintableHist " & ID & "', '" & StartTime & "', '" & EndTime & "'").Tables(0).Rows(0)(0).ToString
+        Catch ex As Exception
+            RaiseError("Loi truy van!", ex)
+        End Try
+        If (strprint <> String.Empty) Then
+            printString(strprint)
+        End If
+    End Sub
+
+#End Region
+
 #End Region
 
 #Region "Form control"
@@ -303,20 +376,6 @@ Public Class frmMain
         UpdateConntextMenu()
     End Sub
 
-    Private Sub printReceipt(ByVal ID As String, ByVal starttime As String, ByVal endtime As String, ByVal pricerate As String)
-        Try
-            Dim strPrint As String = dbc.ExeDataset("exec dbo.get_AppPrintableBill " & ID & ",'" & starttime & "','" & endtime & "'," & pricerate).Tables(0).Rows(0)(0).ToString
-            strPrint = strPrint.Replace("\", vbCrLf)
-
-            Dim prt As New TextPrint(strPrint)
-            prt.Font = New Font("Tahoma", 8)
-            prt.Print()
-        Catch ex As Exception
-            RaiseError("Loi khi in hoa don", ex)
-        End Try
-
-    End Sub
-
 
 
     Private Sub cMenu_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles cMenu.ItemClicked
@@ -339,4 +398,19 @@ Public Class frmMain
 
 #End Region
 
+    Private Sub btn_RefreshInfoList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_RefreshInfoList.Click
+
+    End Sub
+
+    Private Sub btn_PrintInfoList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_PrintInfoList.Click
+
+    End Sub
+
+    Private Sub btn_RefreshHist_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_RefreshHist.Click
+
+    End Sub
+
+    Private Sub btn_PrintHist_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_PrintHist.Click
+
+    End Sub
 End Class

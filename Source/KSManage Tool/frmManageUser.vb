@@ -1,5 +1,5 @@
 Public Class frmManageUser
-    Dim dbc As DatabaseClass
+    Dim dbc As New DatabaseClass ' main database class
     Dim dt As New DataTable
     Dim bln_IsManager As Boolean = False
     Private Sub UpdateList()
