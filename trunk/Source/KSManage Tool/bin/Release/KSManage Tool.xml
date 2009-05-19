@@ -84,6 +84,33 @@ KSManageTool
  Room action: Check out, it's a normal task
  </summary>
 	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printString(System.String)">
+	<summary>
+ Send a string to printer
+ </summary>
+	<param name="str"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printReceipt(System.String,System.String,System.String,System.String)">
+	<summary>
+ Print The receipt. It's a normal task
+ </summary>
+	<param name="ID"></param>
+	<param name="starttime"></param>
+	<param name="endtime"></param>
+	<param name="pricerate"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printInfo(System.String)">
+	<summary>
+ Print room info. It's normal task
+ </summary>
+	<param name="ID">Room ID</param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printHist(System.String,System.String,System.String)">
+	<summary>
+ Print room history. It's admin task
+ </summary>
+	<param name="ID">Room ID</param>
+	<remarks></remarks>
 </member><member name="M:q3main.Applications.KSManageTool.frmMain.frmMain_Load(System.Object,System.EventArgs)">
 	<summary>
  Update the list when repaint and load

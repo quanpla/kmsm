@@ -23,9 +23,11 @@ Public Class frmManageUser
         If dbc.ExeDataset("exec dbo.get_UserStatus").Tables(0).Rows(0)(0) = 0 Then
             ' Staff
             bln_IsManager = False
+            btnChangePW.Text = "Change PW"
         Else
             ' Manager
             bln_IsManager = True
+            btnChangePW.Text = "Reset PW"
         End If
         UpdateList()
     End Sub
@@ -45,21 +47,35 @@ Public Class frmManageUser
             End If
 
             dbc.ExeNonQuery(querystring)
-            UpdateList()
+
         Catch ex As Exception
 
         End Try
+
+        UpdateList()
     End Sub
 
     Private Sub btnChangePW_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangePW.Click
         Try
-            Dim newpass1 As String = InputBox("Password moi:").ToString
-            Dim newpass2 As String = InputBox("Nhap lai password moi:").ToString
-            If newpass1 = newpass2 Then
-                dbc.ExeDataset("exec dbo.")
-            Else
-                MsgBox("Password khong trung nhau.", MsgBoxStyle.OkOnly)
+            If lstUsers.SelectedItems.Count > 0 Then
+                If lstUsers.SelectedItems(0).Text = userlogin Then
+                    Dim currentpass As String = InputBox("Password hien tai:").ToString
+                    Dim newpass1 As String = InputBox("Password moi:").ToString
+                    Dim newpass2 As String = InputBox("Nhap lai password moi:").ToString
+                    Dim errcode As Integer = 1
+                    If newpass1 = newpass2 Then
+                        errcode = CInt(dbc.ExeDataset("exec dbo.upd_UpdatePassword '" & currentpass & "','" & newpass1 & "'").Tables(0).Rows(0).ToString)
+                    Else
+                        MsgBox("Password khong trung nhau.", MsgBoxStyle.OkOnly)
+                    End If
+                    If errcode = 0 Then
+                        MsgBox("Doi password thanh cong.")
+                    End If
+                Else
+                    dbc.ExeNonQuery("exec dbo.upd_ResetPassword '" & lstUsers.SelectedItems(0).Text & "'")
+                End If
             End If
+
 
         Catch ex As Exception
 
@@ -68,5 +84,22 @@ Public Class frmManageUser
 
     Private Sub frmManageUser_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
         frmMain.Show()
+    End Sub
+
+    Private Sub lstUsers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstUsers.SelectedIndexChanged
+        If lstUsers.SelectedItems.Count > 0 Then
+            If lstUsers.SelectedItems(0).Text = userlogin Then
+                btnChangePW.Text = "Change PW"
+            Else
+                btnChangePW.Text = "Reset PW"
+            End If
+        End If
+    End Sub
+
+    Private Sub btnDeleteUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteUser.Click
+        If lstUsers.SelectedItems.Count > 0 Then
+            dbc.ExeNonQuery("exec dbo.admin_DropUser '" & lstUsers.SelectedItems(0).Text & "'")
+        End If
+        UpdateList()
     End Sub
 End Class
