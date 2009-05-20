@@ -8,13 +8,3 @@ obj\Debug\KSM Admin Tool.vbproj.GenerateResource.Cache
 obj\Debug\KSM Admin Tool.exe
 obj\Debug\KSM Admin Tool.xml
 obj\Debug\KSM Admin Tool.pdb
-bin\Release\KSM Admin Tool.exe
-bin\Release\KSM Admin Tool.pdb
-bin\Release\KSM Admin Tool.xml
-obj\Release\ResolveAssemblyReference.cache
-obj\Release\KSM_Admin_Tool.Form1.resources
-obj\Release\KSM_Admin_Tool.Resources.resources
-obj\Release\KSM Admin Tool.vbproj.GenerateResource.Cache
-obj\Release\KSM Admin Tool.exe
-obj\Release\KSM Admin Tool.xml
-obj\Release\KSM Admin Tool.pdb
