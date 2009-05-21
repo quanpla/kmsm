@@ -27,7 +27,7 @@ Public Class frmManageUser
         Else
             ' Manager
             bln_IsManager = True
-            btnChangePW.Text = "Reset PW"
+            btnChangePW.Text = "Change PW/Reset PW"
         End If
         UpdateList()
     End Sub
@@ -41,15 +41,15 @@ Public Class frmManageUser
             Dim isadmin As Boolean = MsgBox("La quan ly?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes
             Dim querystring As String = ""
             If isadmin Then
-                querystring = "exec dbo.admin_Adduser '" & username & "' , 1"
+                querystring = "exec q3admin.Adduser '" & username & "' , 1"
             Else
-                querystring = "exec dbo.admin_Adduser '" & username & "' , 0"
+                querystring = "exec q3admin.Adduser '" & username & "' , 0"
             End If
 
             dbc.ExeNonQuery(querystring)
 
         Catch ex As Exception
-
+            RaiseError("Loi khi tao nguoi dung", ex)
         End Try
 
         UpdateList()
@@ -58,7 +58,7 @@ Public Class frmManageUser
     Private Sub btnChangePW_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnChangePW.Click
         Try
             If lstUsers.SelectedItems.Count > 0 Then
-                If lstUsers.SelectedItems(0).Text = userlogin Then
+                If lstUsers.SelectedItems(0).Text.ToUpper = userlogin.ToUpper Then
                     Dim currentpass As String = InputBox("Password hien tai:").ToString
                     Dim newpass1 As String = InputBox("Password moi:").ToString
                     Dim newpass2 As String = InputBox("Nhap lai password moi:").ToString
@@ -78,7 +78,7 @@ Public Class frmManageUser
 
 
         Catch ex As Exception
-
+            RaiseError("Loi khi doi password", ex)
         End Try
     End Sub
 
@@ -88,17 +88,21 @@ Public Class frmManageUser
 
     Private Sub lstUsers_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstUsers.SelectedIndexChanged
         If lstUsers.SelectedItems.Count > 0 Then
-            If lstUsers.SelectedItems(0).Text = userlogin Then
-                btnChangePW.Text = "Change PW"
+            If lstUsers.SelectedItems(0).Text.ToUpper = userlogin.ToUpper Then
+                btnChangePW.Text = "Doi Password"
             Else
-                btnChangePW.Text = "Reset PW"
+                btnChangePW.Text = "Reset Password"
             End If
         End If
     End Sub
 
     Private Sub btnDeleteUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteUser.Click
         If lstUsers.SelectedItems.Count > 0 Then
-            dbc.ExeNonQuery("exec dbo.admin_DropUser '" & lstUsers.SelectedItems(0).Text & "'")
+            Try
+                dbc.ExeNonQuery("exec q3admin.delUser '" & lstUsers.SelectedItems(0).Text & "'")
+            Catch ex As Exception
+                RaiseError("Loi khi xoa nguoi dung", ex)
+            End Try
         End If
         UpdateList()
     End Sub

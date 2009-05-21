@@ -15,26 +15,26 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_61E9F0DD278D4EF1F2426BBA289D104A"
+        "OwnerKey" = "8:_B97C635674CD499C94388D27DACD3A11"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B97C635674CD499C94388D27DACD3A11"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D78104C2790EEF5C477A9187395C42A8"
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_B97C635674CD499C94388D27DACD3A11"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D78104C2790EEF5C477A9187395C42A8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B97C635674CD499C94388D27DACD3A11"
+        "OwnerKey" = "8:_61E9F0DD278D4EF1F2426BBA289D104A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -55,6 +55,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
         "Release"
         {
@@ -71,6 +82,17 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -100,13 +122,18 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D78104C2790EEF5C477A9187395C42A8"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_61E9F0DD278D4EF1F2426BBA289D104A"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:AnalogClockControl, Version=1.5.0.2, Culture=neutral, PublicKeyToken=dab8dfbe0d581654, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_61E9F0DD278D4EF1F2426BBA289D104A"
+                    {
+                    "Name" = "8:AnalogClockControl.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:AnalogClockControl.dll"
             "TargetName" = "8:"
@@ -135,7 +162,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_73B2FE51BE4D4716A937F8924ECD6AD4"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -301,31 +328,31 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_06F53D7D76884A99B8C2419A8AB08C04"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_27C43EAA5DB64AE0A2AAAEFFBE00B6D6"
             {
-            "Name" = "8:Shortcut to User's Programs Menu"
+            "Name" = "8:KSManage Tool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_96251430B5C74966955B3ABDC2840E98"
-            "Folder" = "8:_96251430B5C74966955B3ABDC2840E98"
-            "WorkingFolder" = "8:_96251430B5C74966955B3ABDC2840E98"
+            "Target" = "8:_B97C635674CD499C94388D27DACD3A11"
+            "Folder" = "8:_73B2FE51BE4D4716A937F8924ECD6AD4"
+            "WorkingFolder" = "8:_D35861723D784F3580B2308B71199F84"
             "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C5A6C478D6374C5B9CB4BB5354D48549"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D3F84C745B3944DAAAED779DFF1ACCEC"
             {
-            "Name" = "8:Shortcut to User's Desktop"
+            "Name" = "8:KSManage Tool"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_73B2FE51BE4D4716A937F8924ECD6AD4"
-            "Folder" = "8:_73B2FE51BE4D4716A937F8924ECD6AD4"
-            "WorkingFolder" = "8:_73B2FE51BE4D4716A937F8924ECD6AD4"
+            "Target" = "8:_B97C635674CD499C94388D27DACD3A11"
+            "Folder" = "8:_96251430B5C74966955B3ABDC2840E98"
+            "WorkingFolder" = "8:_D35861723D784F3580B2308B71199F84"
             "Icon" = "8:"
             "Feature" = "8:"
             }

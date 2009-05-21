@@ -52,7 +52,7 @@ Partial Class frmManageUser
         Me.btnNewUser.Name = "btnNewUser"
         Me.btnNewUser.Size = New System.Drawing.Size(82, 49)
         Me.btnNewUser.TabIndex = 1
-        Me.btnNewUser.Text = "New"
+        Me.btnNewUser.Text = "Them Nguoi Dung Moi"
         Me.btnNewUser.UseVisualStyleBackColor = True
         '
         'btnChangePW
@@ -61,7 +61,7 @@ Partial Class frmManageUser
         Me.btnChangePW.Name = "btnChangePW"
         Me.btnChangePW.Size = New System.Drawing.Size(82, 49)
         Me.btnChangePW.TabIndex = 2
-        Me.btnChangePW.Text = "Change pw"
+        Me.btnChangePW.Text = "Doi/Reset Mat Ma"
         Me.btnChangePW.UseVisualStyleBackColor = True
         '
         'btnDeleteUser
@@ -70,7 +70,7 @@ Partial Class frmManageUser
         Me.btnDeleteUser.Name = "btnDeleteUser"
         Me.btnDeleteUser.Size = New System.Drawing.Size(82, 49)
         Me.btnDeleteUser.TabIndex = 3
-        Me.btnDeleteUser.Text = "Delete"
+        Me.btnDeleteUser.Text = "Xoa Nguoi Dung"
         Me.btnDeleteUser.UseVisualStyleBackColor = True
         '
         'frmManageUser

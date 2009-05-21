@@ -66,6 +66,12 @@
     <Compile Include="frmExtraFee.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPrintHistory.Designer.vb">
+      <DependentUpon>frmPrintHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintHistory.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="globalModule.vb" />
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
@@ -119,6 +125,10 @@
     <EmbeddedResource Include="frmManageUser.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmManageUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintHistory.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmPrintHistory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
