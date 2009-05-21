@@ -120,6 +120,7 @@ Partial Class frmLogin
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmLogin"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login"
         Me.ResumeLayout(False)
         Me.PerformLayout()

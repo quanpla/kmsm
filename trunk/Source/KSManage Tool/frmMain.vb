@@ -55,9 +55,14 @@ Public Class frmMain
 
         '   1.  Room Info
         Dim RoomInfo As New DataTable
+        Dim Room_ID As String
         ' get room id
-        Dim Room_ID As String = lstRoom.SelectedItems(0).SubItems("ID").Text.Trim().Trim("'").Trim(" ")
-
+        Try
+            Room_ID = lstRoom.SelectedItems(0).SubItems("ID").Text.Trim().Trim("'").Trim(" ")
+        Catch ex As Exception
+            RaiseError("Chua co phong nao duoc chon", ex)
+            Return
+        End Try
         RoomInfo = dbc.ExeDataset("exec dbo.get_AppStatus '" + Room_ID + "'").Tables(0)
         ' loop through it
         For Each infodt As DataRow In RoomInfo.Rows
@@ -72,26 +77,27 @@ Public Class frmMain
 
         '   2.  Room history
         RoomInfo.Clear()
-        Try
-            RoomInfo = dbc.ExeDataset("exec dbo.get_AppHistInfo '" + Room_ID + "'").Tables(0)
-            ' loop through it
-            For Each infodt As DataRow In RoomInfo.Rows
-                Dim item As New ListViewItem
-                Dim subitem1 As New ListViewItem.ListViewSubItem
-                Dim subitem2 As New ListViewItem.ListViewSubItem
-                item.Text = infodt("gio")
-                subitem1.Name = "thunhap"
-                subitem1.Text = infodt("thunhap")
-                subitem2.Name = "mota"
-                subitem2.Text = infodt("mota")
-                item.SubItems.Add(subitem1)
-                item.SubItems.Add(subitem2)
-                lst_Hist.Items.Add(item)
-            Next
-        Catch ex As Exception
-            ' it's not a exception, b/c only addmin can get the grant to see data
-        End Try
-
+        If dbc.ExeDataset("exec dbo.get_UserStatus").Tables(0).Rows(0)(0) <> 0 Then
+            Try
+                RoomInfo = dbc.ExeDataset("exec q3admin.SelAppHist '" + Room_ID + "'").Tables(0)
+                ' loop through it
+                For Each infodt As DataRow In RoomInfo.Rows
+                    Dim item As New ListViewItem
+                    Dim subitem1 As New ListViewItem.ListViewSubItem
+                    Dim subitem2 As New ListViewItem.ListViewSubItem
+                    item.Text = infodt("gio")
+                    subitem1.Name = "thunhap"
+                    subitem1.Text = infodt("thunhap")
+                    subitem2.Name = "mota"
+                    subitem2.Text = infodt("mota")
+                    item.SubItems.Add(subitem1)
+                    item.SubItems.Add(subitem2)
+                    lst_Hist.Items.Add(item)
+                Next
+            Catch ex As Exception
+                RaiseError("Loi khi cap nhat thong tin phong", ex)
+            End Try
+        End If
     End Sub
 
     ''' <summary>
@@ -104,8 +110,8 @@ Public Class frmMain
             Dim strRoomName As String = InputBox("Xin nhap ten phong: ", "Them Phong")
 
             ' Exec to add
-            If strRoomName.Trim(" ").Trim("'") Then
-                Dim strquery As String = "exec dbo.admin_AddRoom '" & strRoomName & "'"
+            If strRoomName.Trim(" ").Trim("'").Length > 0 Then
+                Dim strquery As String = "exec q3admin.AddRoom '" & strRoomName & "'"
                 dbc.ExeNonQuery(strquery)
             End If
 
@@ -123,12 +129,36 @@ Public Class frmMain
     Private Sub act_delRoom()
         Try
             If MsgBox("Ban co muon xoa phong " & lstRoom.SelectedItems(0).Text, MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                dbc.ExeNonQuery("exec dbo.admin_DropRoom '" & lstRoom.SelectedItems(0).SubItems("ID").Text + "'")
+                dbc.ExeNonQuery("exec q3admin.delRoom '" & lstRoom.SelectedItems(0).SubItems("ID").Text + "'")
             End If
         Catch ex As Exception
             RaiseError("Loi khi xoa phong", ex)
         End Try
+
+        Updatelist()
     End Sub
+
+    ''' <summary>
+    ''' Room action: Rename room
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub act_renRoom()
+        Try
+            ' Ask for it
+            Dim strRoomName As String = InputBox("Xin nhap ten phong moi: ", "Sua Ten Phong")
+
+            ' Exec to add
+            If strRoomName.Trim(" ").Trim("'").Length > 0 Then
+                Dim strquery As String = "exec q3admin.RenRoom '" & lstRoom.SelectedItems(0).SubItems("ID").Text + "', '" & strRoomName & "'"
+                dbc.ExeNonQuery(strquery)
+            End If
+            ' Update the list
+            Updatelist()
+        Catch ex As Exception
+            RaiseError("Loi khi sua ten phong", ex)
+        End Try
+    End Sub
+
 
     ''' <summary>
     ''' Room action: Change room, it's normal task
@@ -176,12 +206,21 @@ Public Class frmMain
                 Dim inputExtraFee As New frmExtraFee
                 inputExtraFee.ShowDialog(Me)
                 Dim sqlCommand As String
-                If inputExtraFee.hasInput Then
-                    sqlCommand = "exec dbo.Checkout '" & room_id & "', '" & inputExtraFee.ExtraFee & "', '" & inputExtraFee.ExtraReason & "'"
+                If MsgBox("Co tinh gio qua dem khong?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    If inputExtraFee.hasInput Then
+                        sqlCommand = "exec dbo.Checkout '" & room_id & "', 1, '" & inputExtraFee.ExtraFee & "', '" & inputExtraFee.ExtraReason & "'"
+                    Else
+                        sqlCommand = "exec dbo.Checkout '" & room_id & "', 1, NULL, NULL"
+                    End If
                 Else
-                    sqlCommand = "exec dbo.Checkout '" & room_id & "', NULL, NULL"
+                    If inputExtraFee.hasInput Then
+                        sqlCommand = "exec dbo.Checkout '" & room_id & "', 10 '" & inputExtraFee.ExtraFee & "', '" & inputExtraFee.ExtraReason & "'"
+                    Else
+                        sqlCommand = "exec dbo.Checkout '" & room_id & "', 0, NULL, NULL"
+                    End If
                 End If
 
+                
                 Dim dt As DataTable = dbc.ExeDataset(sqlCommand).Tables(0)
                 Dim result As String = dt.Rows(0)(0).ToString
                 If dt.Rows.Count > 0 Then
@@ -283,6 +322,10 @@ Public Class frmMain
     ''' <remarks></remarks>
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Updatelist()
+        ' hide some button
+        If dbc.ExeDataset("exec dbo.get_UserStatus").Tables(0).Rows(0)(0) <> 1 Then
+            tab_hist.Hide()
+        End If
     End Sub
 
 
@@ -389,6 +432,8 @@ Public Class frmMain
                     act_chkIn()
                 Case "chkOut"
                     act_chkOut()
+                Case "renRoom"
+                    act_renRoom()
             End Select
         Catch ex As Exception
             RaiseError("Loi", ex)
@@ -399,18 +444,21 @@ Public Class frmMain
 #End Region
 
     Private Sub btn_RefreshInfoList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_RefreshInfoList.Click
-
-    End Sub
-
-    Private Sub btn_PrintInfoList_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_PrintInfoList.Click
-
+        updateInfoTab()
+        Updatelist()
     End Sub
 
     Private Sub btn_RefreshHist_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_RefreshHist.Click
-
+        updateInfoTab()
+        Updatelist()
     End Sub
 
     Private Sub btn_PrintHist_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_PrintHist.Click
-
+        If dbc.ExeDataset("exec dbo.get_UserStatus").Tables(0).Rows(0)(0) <> 0 Then
+            Dim printDialog As New frmPrintHistory
+            printDialog.ShowDialog(Me)
+        Else
+            MsgBox("Ban khong co quyen truy cap vao lich su he thong")
+        End If
     End Sub
 End Class

@@ -25,7 +25,6 @@
         Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer in", 3)
         Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Checking out", 0)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Me.Label1 = New System.Windows.Forms.Label
         Me.btn_Logout = New System.Windows.Forms.Button
         Me.lstRoom = New System.Windows.Forms.ListView
         Me.imgl_RoomStatus = New System.Windows.Forms.ImageList(Me.components)
@@ -40,7 +39,6 @@
         Me.Room02ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.tab_Extra = New System.Windows.Forms.TabControl
         Me.tab_info = New System.Windows.Forms.TabPage
-        Me.btn_PrintInfoList = New System.Windows.Forms.Button
         Me.btn_RefreshInfoList = New System.Windows.Forms.Button
         Me.lst_Info = New System.Windows.Forms.ListView
         Me.colProperty = New System.Windows.Forms.ColumnHeader
@@ -59,22 +57,13 @@
         Me.tab_hist.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(532, 485)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(84, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Current Login as"
-        '
         'btn_Logout
         '
         Me.btn_Logout.Location = New System.Drawing.Point(665, 519)
         Me.btn_Logout.Name = "btn_Logout"
         Me.btn_Logout.Size = New System.Drawing.Size(125, 46)
         Me.btn_Logout.TabIndex = 2
-        Me.btn_Logout.Text = "Logout/ Switch User"
+        Me.btn_Logout.Text = "Thoat / Doi Nguoi Dung"
         Me.btn_Logout.UseVisualStyleBackColor = True
         '
         'lstRoom
@@ -105,7 +94,7 @@
         Me.btn_ManageUser.Name = "btn_ManageUser"
         Me.btn_ManageUser.Size = New System.Drawing.Size(123, 46)
         Me.btn_ManageUser.TabIndex = 2
-        Me.btn_ManageUser.Text = "Manage User"
+        Me.btn_ManageUser.Text = "Quan Ly Nguoi Dung"
         Me.btn_ManageUser.UseVisualStyleBackColor = True
         '
         'Clock1
@@ -189,7 +178,6 @@
         '
         'tab_info
         '
-        Me.tab_info.Controls.Add(Me.btn_PrintInfoList)
         Me.tab_info.Controls.Add(Me.btn_RefreshInfoList)
         Me.tab_info.Controls.Add(Me.lst_Info)
         Me.tab_info.Location = New System.Drawing.Point(4, 22)
@@ -200,18 +188,9 @@
         Me.tab_info.Text = "Thong Tin Them"
         Me.tab_info.UseVisualStyleBackColor = True
         '
-        'btn_PrintInfoList
-        '
-        Me.btn_PrintInfoList.Location = New System.Drawing.Point(148, 150)
-        Me.btn_PrintInfoList.Name = "btn_PrintInfoList"
-        Me.btn_PrintInfoList.Size = New System.Drawing.Size(75, 23)
-        Me.btn_PrintInfoList.TabIndex = 7
-        Me.btn_PrintInfoList.Text = "In"
-        Me.btn_PrintInfoList.UseVisualStyleBackColor = True
-        '
         'btn_RefreshInfoList
         '
-        Me.btn_RefreshInfoList.Location = New System.Drawing.Point(46, 150)
+        Me.btn_RefreshInfoList.Location = New System.Drawing.Point(39, 152)
         Me.btn_RefreshInfoList.Name = "btn_RefreshInfoList"
         Me.btn_RefreshInfoList.Size = New System.Drawing.Size(75, 23)
         Me.btn_RefreshInfoList.TabIndex = 6
@@ -316,7 +295,6 @@
         Me.Controls.Add(Me.lstRoom)
         Me.Controls.Add(Me.btn_Logout)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btn_ManageUser)
         Me.Controls.Add(Me.Clock1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -328,10 +306,8 @@
         Me.tab_info.ResumeLayout(False)
         Me.tab_hist.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btn_Logout As System.Windows.Forms.Button
     Friend WithEvents lstRoom As System.Windows.Forms.ListView
     Friend WithEvents imgl_RoomStatus As System.Windows.Forms.ImageList
@@ -352,7 +328,6 @@
     Friend WithEvents lst_Hist As System.Windows.Forms.ListView
     Friend WithEvents colDate As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents btn_PrintInfoList As System.Windows.Forms.Button
     Friend WithEvents btn_RefreshInfoList As System.Windows.Forms.Button
     Friend WithEvents btn_PrintHist As System.Windows.Forms.Button
     Friend WithEvents btn_RefreshHist As System.Windows.Forms.Button

@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.KSM_Admin_Tool.Form1
+            Me.MainForm = Global.q3main.Applications.KSM_Admin_Tool.Form1
         End Sub
     End Class
 End Namespace

@@ -52,6 +52,7 @@ Partial Class frmExtraFee
         Me.txtExtraFee.Name = "txtExtraFee"
         Me.txtExtraFee.Size = New System.Drawing.Size(135, 20)
         Me.txtExtraFee.TabIndex = 2
+        Me.txtExtraFee.Text = "0"
         '
         'Label2
         '
