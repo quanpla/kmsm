@@ -1,0 +1,22 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "q3main.Applications.qsdl_qlks"
+   MSDTVersion = "80"
+   DefDBRef = "lt.csdl_qlks.dbo"
+   Begin Folder = "Change Scripts"
+      Script = "dbo.calc_payment.sql"
+      Script = "dbo.CheckIn.sql"
+      Script = "dbo.CheckOut.sql"
+      Script = "dbo.list_AllRooms.sql"
+   End
+   Begin Folder = "Create Scripts"
+   End
+   Begin DBRefFolder = "Database References"
+      Begin DBRefNode = "lt.csdl_qlks.dbo"
+         ConnectStr = "Data Source=.;Initial Catalog=csdl_qlks;Integrated Security=True"
+         Provider = "{91510608-8809-4020-8897-FBA057E22D54}"
+         Colorizer = 6
+      End
+   End
+   Begin Folder = "Queries"
+   End
+End
