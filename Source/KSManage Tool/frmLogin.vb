@@ -23,6 +23,7 @@ Public Class frmLogin
             End If
 
             ' Show main frame
+            frmMain.showHideAdminTask()
             frmMain.Show()
 
             ' Clear password text

@@ -26,7 +26,7 @@ Public Class frmExtraFee
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
         ExtraFee = txtExtraFee.Text.Trim()
         ExtraReason = txtReason.Text.Trim()
-        If (ExtraFee.Length > 0) Then
+        If (ExtraFee.Length > 0 And ExtraFee.Trim("0").Trim("'").Trim(" ").Length > 0) Then
             hasInput = True
         End If
         Me.Close()

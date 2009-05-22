@@ -59,24 +59,18 @@ Public Class frmManageUser
         Try
             If lstUsers.SelectedItems.Count > 0 Then
                 If lstUsers.SelectedItems(0).Text.ToUpper = userlogin.ToUpper Then
-                    Dim currentpass As String = InputBox("Password hien tai:").ToString
-                    Dim newpass1 As String = InputBox("Password moi:").ToString
-                    Dim newpass2 As String = InputBox("Nhap lai password moi:").ToString
-                    Dim errcode As Integer = 1
-                    If newpass1 = newpass2 Then
-                        errcode = CInt(dbc.ExeDataset("exec dbo.upd_UpdatePassword '" & currentpass & "','" & newpass1 & "'").Tables(0).Rows(0).ToString)
-                    Else
-                        MsgBox("Password khong trung nhau.", MsgBoxStyle.OkOnly)
-                    End If
-                    If errcode = 0 Then
-                        MsgBox("Doi password thanh cong.")
+                    Dim pwdDlg As New frmPasswordUpdate()
+                    If (pwdDlg.ShowDialog(Me) = Windows.Forms.DialogResult.OK) Then
+                        Try
+                            dbc.ExeNonQuery(String.Format("exec dbo.upd_UpdatePassword '{0}', '{1}'", pwdDlg.oldPassword, pwdDlg.newPassword))
+                        Catch ex As Exception
+                            RaiseError("Loi khi cap nhat Password", ex)
+                        End Try
                     End If
                 Else
                     dbc.ExeNonQuery("exec dbo.upd_ResetPassword '" & lstUsers.SelectedItems(0).Text & "'")
                 End If
             End If
-
-
         Catch ex As Exception
             RaiseError("Loi khi doi password", ex)
         End Try

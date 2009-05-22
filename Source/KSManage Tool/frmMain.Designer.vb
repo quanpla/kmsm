@@ -20,10 +20,10 @@
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Empty"}, 2, System.Drawing.Color.Empty, System.Drawing.SystemColors.Window, Nothing)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer went out", 1)
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer in", 3)
-        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Checking out", 0)
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem(New String() {"Empty"}, 2, System.Drawing.Color.Empty, System.Drawing.SystemColors.Window, Nothing)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer went out", 1)
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Customer in", 3)
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Checking out", 0)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.btn_Logout = New System.Windows.Forms.Button
         Me.lstRoom = New System.Windows.Forms.ListView
@@ -50,11 +50,26 @@
         Me.colDate = New System.Windows.Forms.ColumnHeader
         Me.colIncome = New System.Windows.Forms.ColumnHeader
         Me.colComment = New System.Windows.Forms.ColumnHeader
+        Me.tab_UpdPrice = New System.Windows.Forms.TabPage
+        Me.lbl_UpdatePriceTag = New System.Windows.Forms.Label
+        Me.btn_RefreshPriceUpdate = New System.Windows.Forms.Button
+        Me.btn_UpdPrice = New System.Windows.Forms.Button
+        Me.txtPriceUpd = New System.Windows.Forms.TextBox
+        Me.lst_BangGia = New System.Windows.Forms.ListView
+        Me.colPriceCD = New System.Windows.Forms.ColumnHeader
+        Me.colPrice = New System.Windows.Forms.ColumnHeader
+        Me.tab_UpdTemplate = New System.Windows.Forms.TabPage
+        Me.btnTemplateListRefresh = New System.Windows.Forms.Button
+        Me.btn_UpdTemplate = New System.Windows.Forms.Button
+        Me.txtUpdTemplate = New System.Windows.Forms.TextBox
+        Me.lst_Template = New System.Windows.Forms.ListBox
         Me.ColumnHeader2 = New System.Windows.Forms.ColumnHeader
         Me.cMenu.SuspendLayout()
         Me.tab_Extra.SuspendLayout()
         Me.tab_info.SuspendLayout()
         Me.tab_hist.SuspendLayout()
+        Me.tab_UpdPrice.SuspendLayout()
+        Me.tab_UpdTemplate.SuspendLayout()
         Me.SuspendLayout()
         '
         'btn_Logout
@@ -69,7 +84,7 @@
         'lstRoom
         '
         Me.lstRoom.Alignment = System.Windows.Forms.ListViewAlignment.[Default]
-        Me.lstRoom.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4})
+        Me.lstRoom.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
         Me.lstRoom.LargeImageList = Me.imgl_RoomStatus
         Me.lstRoom.Location = New System.Drawing.Point(3, 4)
         Me.lstRoom.MultiSelect = False
@@ -170,6 +185,8 @@
         '
         Me.tab_Extra.Controls.Add(Me.tab_info)
         Me.tab_Extra.Controls.Add(Me.tab_hist)
+        Me.tab_Extra.Controls.Add(Me.tab_UpdPrice)
+        Me.tab_Extra.Controls.Add(Me.tab_UpdTemplate)
         Me.tab_Extra.Location = New System.Drawing.Point(3, 367)
         Me.tab_Extra.Name = "tab_Extra"
         Me.tab_Extra.SelectedIndex = 0
@@ -281,6 +298,125 @@
         Me.colComment.Text = "Mo ta"
         Me.colComment.Width = 110
         '
+        'tab_UpdPrice
+        '
+        Me.tab_UpdPrice.Controls.Add(Me.lbl_UpdatePriceTag)
+        Me.tab_UpdPrice.Controls.Add(Me.btn_RefreshPriceUpdate)
+        Me.tab_UpdPrice.Controls.Add(Me.btn_UpdPrice)
+        Me.tab_UpdPrice.Controls.Add(Me.txtPriceUpd)
+        Me.tab_UpdPrice.Controls.Add(Me.lst_BangGia)
+        Me.tab_UpdPrice.Location = New System.Drawing.Point(4, 22)
+        Me.tab_UpdPrice.Name = "tab_UpdPrice"
+        Me.tab_UpdPrice.Padding = New System.Windows.Forms.Padding(3)
+        Me.tab_UpdPrice.Size = New System.Drawing.Size(519, 176)
+        Me.tab_UpdPrice.TabIndex = 2
+        Me.tab_UpdPrice.Text = "Chinh Gia"
+        Me.tab_UpdPrice.UseVisualStyleBackColor = True
+        '
+        'lbl_UpdatePriceTag
+        '
+        Me.lbl_UpdatePriceTag.AutoSize = True
+        Me.lbl_UpdatePriceTag.Location = New System.Drawing.Point(231, 22)
+        Me.lbl_UpdatePriceTag.Name = "lbl_UpdatePriceTag"
+        Me.lbl_UpdatePriceTag.Size = New System.Drawing.Size(84, 13)
+        Me.lbl_UpdatePriceTag.TabIndex = 4
+        Me.lbl_UpdatePriceTag.Text = "Dang Cap Nhat:"
+        '
+        'btn_RefreshPriceUpdate
+        '
+        Me.btn_RefreshPriceUpdate.Location = New System.Drawing.Point(426, 147)
+        Me.btn_RefreshPriceUpdate.Name = "btn_RefreshPriceUpdate"
+        Me.btn_RefreshPriceUpdate.Size = New System.Drawing.Size(87, 23)
+        Me.btn_RefreshPriceUpdate.TabIndex = 3
+        Me.btn_RefreshPriceUpdate.Text = "Refresh"
+        Me.btn_RefreshPriceUpdate.UseVisualStyleBackColor = True
+        '
+        'btn_UpdPrice
+        '
+        Me.btn_UpdPrice.Location = New System.Drawing.Point(272, 87)
+        Me.btn_UpdPrice.Name = "btn_UpdPrice"
+        Me.btn_UpdPrice.Size = New System.Drawing.Size(75, 56)
+        Me.btn_UpdPrice.TabIndex = 2
+        Me.btn_UpdPrice.Text = "Cap Nhat Gia"
+        Me.btn_UpdPrice.UseVisualStyleBackColor = True
+        '
+        'txtPriceUpd
+        '
+        Me.txtPriceUpd.Location = New System.Drawing.Point(272, 48)
+        Me.txtPriceUpd.Name = "txtPriceUpd"
+        Me.txtPriceUpd.Size = New System.Drawing.Size(100, 20)
+        Me.txtPriceUpd.TabIndex = 1
+        '
+        'lst_BangGia
+        '
+        Me.lst_BangGia.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colPriceCD, Me.colPrice})
+        Me.lst_BangGia.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.lst_BangGia.Location = New System.Drawing.Point(7, 7)
+        Me.lst_BangGia.MultiSelect = False
+        Me.lst_BangGia.Name = "lst_BangGia"
+        Me.lst_BangGia.Size = New System.Drawing.Size(198, 163)
+        Me.lst_BangGia.TabIndex = 0
+        Me.lst_BangGia.UseCompatibleStateImageBehavior = False
+        Me.lst_BangGia.View = System.Windows.Forms.View.Details
+        '
+        'colPriceCD
+        '
+        Me.colPriceCD.Text = "Ma Gia"
+        '
+        'colPrice
+        '
+        Me.colPrice.Text = "Gia"
+        '
+        'tab_UpdTemplate
+        '
+        Me.tab_UpdTemplate.Controls.Add(Me.btnTemplateListRefresh)
+        Me.tab_UpdTemplate.Controls.Add(Me.btn_UpdTemplate)
+        Me.tab_UpdTemplate.Controls.Add(Me.txtUpdTemplate)
+        Me.tab_UpdTemplate.Controls.Add(Me.lst_Template)
+        Me.tab_UpdTemplate.Location = New System.Drawing.Point(4, 22)
+        Me.tab_UpdTemplate.Name = "tab_UpdTemplate"
+        Me.tab_UpdTemplate.Padding = New System.Windows.Forms.Padding(3)
+        Me.tab_UpdTemplate.Size = New System.Drawing.Size(519, 176)
+        Me.tab_UpdTemplate.TabIndex = 3
+        Me.tab_UpdTemplate.Text = "Chinh Template"
+        Me.tab_UpdTemplate.UseVisualStyleBackColor = True
+        '
+        'btnTemplateListRefresh
+        '
+        Me.btnTemplateListRefresh.Location = New System.Drawing.Point(456, 147)
+        Me.btnTemplateListRefresh.Name = "btnTemplateListRefresh"
+        Me.btnTemplateListRefresh.Size = New System.Drawing.Size(60, 23)
+        Me.btnTemplateListRefresh.TabIndex = 3
+        Me.btnTemplateListRefresh.Text = "Refresh"
+        Me.btnTemplateListRefresh.UseVisualStyleBackColor = True
+        '
+        'btn_UpdTemplate
+        '
+        Me.btn_UpdTemplate.Location = New System.Drawing.Point(458, 5)
+        Me.btn_UpdTemplate.Name = "btn_UpdTemplate"
+        Me.btn_UpdTemplate.Size = New System.Drawing.Size(58, 136)
+        Me.btn_UpdTemplate.TabIndex = 2
+        Me.btn_UpdTemplate.Text = "Cap Nhat"
+        Me.btn_UpdTemplate.UseVisualStyleBackColor = True
+        '
+        'txtUpdTemplate
+        '
+        Me.txtUpdTemplate.AcceptsReturn = True
+        Me.txtUpdTemplate.AcceptsTab = True
+        Me.txtUpdTemplate.Location = New System.Drawing.Point(133, 7)
+        Me.txtUpdTemplate.Multiline = True
+        Me.txtUpdTemplate.Name = "txtUpdTemplate"
+        Me.txtUpdTemplate.Size = New System.Drawing.Size(319, 160)
+        Me.txtUpdTemplate.TabIndex = 1
+        '
+        'lst_Template
+        '
+        Me.lst_Template.FormattingEnabled = True
+        Me.lst_Template.Location = New System.Drawing.Point(7, 7)
+        Me.lst_Template.Name = "lst_Template"
+        Me.lst_Template.Size = New System.Drawing.Size(120, 160)
+        Me.lst_Template.TabIndex = 0
+        '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Status"
@@ -305,6 +441,10 @@
         Me.tab_Extra.ResumeLayout(False)
         Me.tab_info.ResumeLayout(False)
         Me.tab_hist.ResumeLayout(False)
+        Me.tab_UpdPrice.ResumeLayout(False)
+        Me.tab_UpdPrice.PerformLayout()
+        Me.tab_UpdTemplate.ResumeLayout(False)
+        Me.tab_UpdTemplate.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -334,5 +474,18 @@
     Friend WithEvents colValue As System.Windows.Forms.ColumnHeader
     Friend WithEvents colIncome As System.Windows.Forms.ColumnHeader
     Friend WithEvents colComment As System.Windows.Forms.ColumnHeader
+    Friend WithEvents tab_UpdPrice As System.Windows.Forms.TabPage
+    Friend WithEvents tab_UpdTemplate As System.Windows.Forms.TabPage
+    Friend WithEvents btn_UpdPrice As System.Windows.Forms.Button
+    Friend WithEvents txtPriceUpd As System.Windows.Forms.TextBox
+    Friend WithEvents lst_BangGia As System.Windows.Forms.ListView
+    Friend WithEvents colPriceCD As System.Windows.Forms.ColumnHeader
+    Friend WithEvents colPrice As System.Windows.Forms.ColumnHeader
+    Friend WithEvents btn_UpdTemplate As System.Windows.Forms.Button
+    Friend WithEvents txtUpdTemplate As System.Windows.Forms.TextBox
+    Friend WithEvents lst_Template As System.Windows.Forms.ListBox
+    Friend WithEvents btn_RefreshPriceUpdate As System.Windows.Forms.Button
+    Friend WithEvents btnTemplateListRefresh As System.Windows.Forms.Button
+    Friend WithEvents lbl_UpdatePriceTag As System.Windows.Forms.Label
 
     End Class
