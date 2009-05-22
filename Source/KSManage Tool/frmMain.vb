@@ -220,7 +220,7 @@ Public Class frmMain
                     End If
                 End If
 
-                
+
                 Dim dt As DataTable = dbc.ExeDataset(sqlCommand).Tables(0)
                 Dim result As String = dt.Rows(0)(0).ToString
                 If dt.Rows.Count > 0 Then
@@ -322,10 +322,7 @@ Public Class frmMain
     ''' <remarks></remarks>
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Updatelist()
-        ' hide some button
-        If dbc.ExeDataset("exec dbo.get_UserStatus").Tables(0).Rows(0)(0) <> 1 Then
-            tab_hist.Hide()
-        End If
+        MsgBox("test")
     End Sub
 
 
@@ -336,6 +333,7 @@ Public Class frmMain
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmMain_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
+        MsgBox("test")
         frmLogin.Show()
     End Sub
 
