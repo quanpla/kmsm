@@ -11,6 +11,19 @@ Public Class frmMain
 
 #Region "Private sub"
 
+#Region "Data Validation"
+    Private Function isNumeric(ByVal str As String) As Boolean
+        Dim chk As Boolean = True
+
+        Try
+            Dim numTest As Double = Double.Parse(str.Trim().Trim("'").Trim(" "))
+        Catch ex As Exception
+            chk = False
+        End Try
+        Return chk
+    End Function
+#End Region
+
     ''' <summary>
     ''' Update the list of all the rooms
     ''' </summary>
@@ -42,6 +55,45 @@ Public Class frmMain
 
         ' Update the Context Menu again
         lstRoom.ContextMenuStrip = cMenu
+
+        ' Update the price
+        updateInfoTab_noRoom()
+    End Sub
+
+    Public Sub showHideAdminTask()
+        ' hide some admin tool
+        Dim isAdmin As Integer = dbc.ExeDataset("exec dbo.get_UserStatus").Tables(0).Rows(0)(0)
+        Dim user As String = dbc.ExeDataset("select system_user").Tables(0).Rows(0)(0).ToString
+        If isAdmin = 0 Then
+            hideAdminTask()
+        Else
+            showAdminTask()
+        End If
+        tab_Extra.TabPages(0).Select()
+    End Sub
+
+    ''' <summary>
+    ''' hide all the components that for admin
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub hideAdminTask()
+        If (tab_Extra.TabPages.Contains(tab_hist)) Then
+            tab_Extra.TabPages.Remove(tab_hist)
+            tab_Extra.TabPages.Remove(tab_UpdPrice)
+            tab_Extra.TabPages.Remove(tab_UpdTemplate)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Show all the components for admin
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub showAdminTask()
+        If (Not tab_Extra.TabPages.Contains(tab_hist)) Then
+            tab_Extra.TabPages.Add(tab_hist)
+            tab_Extra.TabPages.Add(tab_UpdPrice)
+            tab_Extra.TabPages.Add(tab_UpdTemplate)
+        End If
     End Sub
 
     ''' <summary>
@@ -52,6 +104,8 @@ Public Class frmMain
         'init
         lst_Info.Items.Clear()
         lst_Hist.Items.Clear()
+        lst_BangGia.Items.Clear()
+        lst_Template.Items.Clear()
 
         '   1.  Room Info
         Dim RoomInfo As New DataTable
@@ -97,6 +151,43 @@ Public Class frmMain
             Catch ex As Exception
                 RaiseError("Loi khi cap nhat thong tin phong", ex)
             End Try
+        End If
+    End Sub
+
+    Private Sub updateInfoTab_noRoom()
+        lst_BangGia.Items.Clear()
+        lst_Template.Items.Clear()
+
+        '   1.  Room Info
+        Dim RoomInfo As New DataTable
+        Try
+            RoomInfo = dbc.ExeDataset("exec q3admin.SelBangGia").Tables(0)
+            ' loop through it
+            For Each infodt As DataRow In RoomInfo.Rows
+                Dim item As New ListViewItem
+                Dim subitem1 As New ListViewItem.ListViewSubItem
+                item.Text = infodt("BangGia_CD")
+                subitem1.Name = "Gia"
+                subitem1.Text = infodt("Gia")
+                item.SubItems.Add(subitem1)
+                lst_BangGia.Items.Add(item)
+            Next
+        Catch ex As Exception
+            RaiseError("Loi khi cap nhat bang gia", ex)
+        End Try
+
+        Try
+            RoomInfo = dbc.ExeDataset("exec q3admin.SelTemplate").Tables(0)
+            ' loop through it
+            For Each infodt As DataRow In RoomInfo.Rows
+                lst_Template.Items.Add(infodt("Template_CD"))
+            Next
+        Catch ex As Exception
+            RaiseError("Loi khi cap nhat danh sach Template.", ex)
+        End Try
+        If lst_Template.SelectedItems.Count = 1 Then
+            Dim strTemplate As String = dbc.ExeDataset("exec q3admin.SelTemplate '" + lst_Template.SelectedItem.ToString + "'").Tables(0).Rows(0)(1).ToString
+            txtUpdTemplate.Text = strTemplate.Replace("\", vbCrLf)
         End If
     End Sub
 
@@ -199,7 +290,7 @@ Public Class frmMain
         ' Ask if user really need to check out
         Dim room_name As String = lstRoom.SelectedItems(0).Text
 
-        If MsgBox("Ban co muon tra phong " & room_name & "hay khong?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+        If MsgBox("Ban co muon tra phong " & room_name & " hay khong?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             Try
                 Dim room_id As String = lstRoom.SelectedItems(0).SubItems("ID").Text.Trim().Trim("'").Trim(" ")
                 ' Ask if there is additinal fee?
@@ -214,7 +305,7 @@ Public Class frmMain
                     End If
                 Else
                     If inputExtraFee.hasInput Then
-                        sqlCommand = "exec dbo.Checkout '" & room_id & "', 10 '" & inputExtraFee.ExtraFee & "', '" & inputExtraFee.ExtraReason & "'"
+                        sqlCommand = "exec dbo.Checkout '" & room_id & "', 1, '" & inputExtraFee.ExtraFee & "', '" & inputExtraFee.ExtraReason & "'"
                     Else
                         sqlCommand = "exec dbo.Checkout '" & room_id & "', 0, NULL, NULL"
                     End If
@@ -322,7 +413,6 @@ Public Class frmMain
     ''' <remarks></remarks>
     Private Sub frmMain_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Updatelist()
-        MsgBox("test")
     End Sub
 
 
@@ -333,7 +423,6 @@ Public Class frmMain
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub frmMain_FormClosed(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-        MsgBox("test")
         frmLogin.Show()
     End Sub
 
@@ -457,6 +546,56 @@ Public Class frmMain
             printDialog.ShowDialog(Me)
         Else
             MsgBox("Ban khong co quyen truy cap vao lich su he thong")
+        End If
+    End Sub
+
+    Private Sub btn_RefreshPriceUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_RefreshPriceUpdate.Click
+        updateInfoTab_noRoom()
+    End Sub
+
+    Private Sub btn_RefreshTemplateUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTemplateListRefresh.Click
+        updateInfoTab_noRoom()
+    End Sub
+
+    Private Sub btn_UpdPrice_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_UpdPrice.Click
+        Dim strNewPrice As String = txtPriceUpd.Text
+        If isNumeric(strNewPrice) Then
+            Try
+                dbc.ExeNonQuery("exec q3admin.UpdBangGia '" + lst_BangGia.SelectedItems(0).Text + "', '" + strNewPrice + "'")
+            Catch ex As Exception
+                RaiseError("Loi khi cap nhat gia", ex)
+            End Try
+            updateInfoTab_noRoom()
+        Else
+            MsgBox("Gia tien phai la mot con so!")
+            txtPriceUpd.Focus()
+            txtPriceUpd.SelectAll()
+        End If
+    End Sub
+
+    Private Sub lst_BangGia_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lst_BangGia.ItemActivate
+        txtPriceUpd.Text = lst_BangGia.SelectedItems(0).SubItems(1).Text
+        lbl_UpdatePriceTag.Text = "Dang Cap Nhat: " + lst_BangGia.SelectedItems(0).Text
+    End Sub
+
+    Private Sub lst_Template_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lst_Template.SelectedIndexChanged
+        If lst_Template.SelectedItems.Count = 1 Then
+            Dim strTemplate As String = dbc.ExeDataset("exec q3admin.SelTemplate '" + lst_Template.SelectedItem.ToString + "'").Tables(0).Rows(0)(1).ToString
+            txtUpdTemplate.Text = strTemplate.Replace("\", vbCrLf)
+        End If
+    End Sub
+
+    Private Sub btn_UpdTemplate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_UpdTemplate.Click
+        If lst_Template.SelectedItems.Count = 1 Then
+            Dim Template_CD As String = lst_Template.SelectedItem.ToString
+            Dim updTemplate As String = txtUpdTemplate.Text.Replace(vbCrLf, "\")
+            Dim sql As String = String.Format("exec q3admin.UpdTemplate '{0}', '{1}'", Template_CD, updTemplate)
+            Try
+                dbc.ExeNonQuery(sql)
+                updateInfoTab_noRoom()
+            Catch ex As Exception
+                RaiseError("Loi khi cap nhat template", ex)
+            End Try
         End If
     End Sub
 End Class

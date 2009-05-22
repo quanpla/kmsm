@@ -21,6 +21,7 @@ Public Class DatabaseClass
     End Function
 
     Public Sub ConnectData()
+        strConnectionString = strConn
         Try
             If dataConn Is Nothing Then dataConn = New System.Data.SqlClient.SqlConnection
             If dataConn.State = System.Data.ConnectionState.Closed Then

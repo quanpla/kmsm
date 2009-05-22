@@ -66,6 +66,12 @@
     <Compile Include="frmExtraFee.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPasswordUpdate.Designer.vb">
+      <DependentUpon>frmPasswordUpdate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPasswordUpdate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrintHistory.Designer.vb">
       <DependentUpon>frmPrintHistory.vb</DependentUpon>
     </Compile>
@@ -125,6 +131,10 @@
     <EmbeddedResource Include="frmManageUser.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmManageUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPasswordUpdate.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmPasswordUpdate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrintHistory.resx">
       <SubType>Designer</SubType>
