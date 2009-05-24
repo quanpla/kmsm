@@ -1,0 +1,177 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+KSManageTool
+</name>
+</assembly>
+<members>
+<member name="M:q3main.Applications.KSManageTool.frmMain.Updatelist">
+	<summary>
+ Update the list of all the rooms
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.hideAdminTask">
+	<summary>
+ hide all the components that for admin
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.showAdminTask">
+	<summary>
+ Show all the components for admin
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.updateInfoTab">
+	<summary>
+ Update all info in the info tab
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.act_addRoom">
+	<summary>
+ Room action: Add a new room. This option should appear for only admin
+ </summary>
+	<remarks>All the processing is for the database to hold</remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.act_delRoom">
+	<summary>
+ Room action: Delete Room, it's an admin task
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.act_renRoom">
+	<summary>
+ Room action: Rename room
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.act_chgRoom(System.Object,System.EventArgs)">
+	<summary>
+ Room action: Change room, it's normal task
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.act_chkIn">
+	<summary>
+ Room action: Check in, it's a normal task
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.act_chkOut">
+	<summary>
+ Room action: Check out, it's a normal task
+ </summary>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printString(System.String)">
+	<summary>
+ Send a string to printer
+ </summary>
+	<param name="str"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printReceipt(System.String,System.String,System.String,System.String)">
+	<summary>
+ Print The receipt. It's a normal task
+ </summary>
+	<param name="ID"></param>
+	<param name="starttime"></param>
+	<param name="endtime"></param>
+	<param name="pricerate"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printInfo(System.String)">
+	<summary>
+ Print room info. It's normal task
+ </summary>
+	<param name="ID">Room ID</param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.printHist(System.String,System.String,System.String)">
+	<summary>
+ Print room history. It's admin task
+ </summary>
+	<param name="ID">Room ID</param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.frmMain_Load(System.Object,System.EventArgs)">
+	<summary>
+ Update the list when repaint and load
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmMain.frmMain_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
+	<summary>
+ When Close this form, open the log in form
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="P:q3main.Applications.KSManageTool.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:q3main.Applications.KSManageTool.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:q3main.Applications.KSManageTool.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:q3main.Applications.KSManageTool.ValidationClass.validateNull(System.Collections.ArrayList,System.Collections.ArrayList,System.String)">
+	<summary>
+ Using to validate Null
+ </summary>
+	<param name="arrTextBox">array list of TextBox</param>
+	<param name="arrLabel">array list of Label show validation Message</param>
+	<param name="strMessgeToShow">Message to show validation Message</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.ValidationClass.validateNumber(System.Collections.ArrayList,System.Collections.ArrayList,System.String)">
+	<summary>
+ Using to validate Number
+ </summary>
+	<param name="arrTextBox">array list of TextBox</param>
+	<param name="arrLabel">array list of Label show validation Message</param>
+	<param name="strMessgeToShow">Message to show validation Message</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.ValidationClass.validateDateStringByStringFormat(System.String,System.String)">
+	<summary>
+	</summary>
+	<param name="strInputDateString">type string: input date string</param>
+	<param name="strDateFormat">type string: date format to validate</param>
+	<returns>type bool: true if date input valid, else return false</returns>
+</member><member name="M:q3main.Applications.KSManageTool.GlobalClass.convertDate(System.String,System.String)">
+	<summary>
+ Convert date to string
+ </summary>
+	<param name="strDateValue"></param>
+	<param name="strCurrentDateFormat"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmLogin.Login_Load(System.Object,System.EventArgs)">
+	<summary>
+ Initialized the form
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmLogin.btnClear_Click(System.Object,System.EventArgs)">
+	<summary>
+ Button clear event
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmLogin.btnLogin_Click(System.Object,System.EventArgs)">
+	<summary>
+ Button Loging event
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:q3main.Applications.KSManageTool.frmLogin.btnExit_Click(System.Object,System.EventArgs)">
+	<summary>
+ Button Exit event
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
