@@ -93,6 +93,7 @@ Public Class frmMain
             tab_Extra.TabPages.Add(tab_hist)
             tab_Extra.TabPages.Add(tab_UpdPrice)
             tab_Extra.TabPages.Add(tab_UpdTemplate)
+            updateInfoTab_noRoom()
         End If
     End Sub
 
@@ -437,12 +438,6 @@ Public Class frmMain
         End If
     End Sub
 
-#End Region
-
-#Region "Clock control"
-    Private Sub Clock1_TimeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Clock1.TimeChanged
-        lblDate.Text = Now.Date.ToString("dddd dd-MM-yyyy")
-    End Sub
 #End Region
 
 #Region "Button to go to other form"

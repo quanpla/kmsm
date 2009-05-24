@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.0.13;Initial Catalog=csdl_qlks;Persist Security Info=True;")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=csdl_qlks;Persist Security Info=True;")>  _
         Public Property connectionStr() As String
             Get
                 Return CType(Me("connectionStr"),String)

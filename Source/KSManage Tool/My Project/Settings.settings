@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="connectionStr" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=192.168.0.13;Initial Catalog=csdl_qlks;Persist Security Info=True;</Value>
+      <Value Profile="(Default)">Data Source=localhost;Initial Catalog=csdl_qlks;Persist Security Info=True;</Value>
     </Setting>
     <Setting Name="lastuser" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
