@@ -8,11 +8,14 @@
 #include "physics.h"
 #include "rocket.h"
 #include "rlauncher.h"
+#include "enemy.h"
 #include "utils.h"
 #include "sprites.h"
 
 rlaunchertype launcher;
 rockettype rockets[ROCKET_NUMBER_OF_ENTITY];
+enemytype enemies[ENEMY_NUMBER_OF_ENTITY];
+
 void interrupt_handler();
 
 int main(void){
@@ -49,12 +52,10 @@ void interrupt_handler() {
 		
 		if(!(*KEYS & KEY_A)){
 			if(waitReload == 0){
-				sprintf(msg, "key A pressed\n");
-				print(msg);
 				for (i = 0; i<ROCKET_NUMBER_OF_ENTITY; i++){
 					if (!isRocketLaunched(rockets[i])){
-						launchRocket(rockets + i, launcher.phys.x, launcher.phys.y, Int2Fix(10), Int2Fix(1), 0, launcher.rocketAngle);
-						waitReload = 100;
+						launchRocket(rockets + i, launcher.phys.x, launcher.phys.y, Int2Fix(20), Int2Fix(2), 0, launcher.rocketAngle);
+						waitReload = 500;
 						break;
 					}
 				}
@@ -74,6 +75,16 @@ void interrupt_handler() {
 		for (i = 0; i<ROCKET_NUMBER_OF_ENTITY; i++){
 			if (isRocketLaunched(rockets[i])){
 				rockets[i].phys.t += (1<<10);
+			}
+		}
+		for (i = 0; i<ENEMY_NUMBER_OF_ENTITY; i++){
+			if (isEnemyWalked(enemies[i])){
+				enemies[i].phys.t += (1<<8);
+				if (enemies[i].curFrame < ENEMY_SPRITE_ANIM_NUM - 1)
+					enemies[i].curFrame++;
+				else
+					enemies[i].curFrame = 0;
+				setEnemyAnimation(i, enemies[i].curFrame);
 			}
 		}
 		
@@ -100,10 +111,17 @@ void testFinal(){
 		initRocket(rockets + i);
 		setRocketAngle(i, launcher.rocketAngle);
 	}
+	for (i=0; i < ENEMY_NUMBER_OF_ENTITY; i++){
+		initializeEnemy(enemies + i);
+	}
+	startEnemy(enemies, 1);
+	
 	i = 0;
 	while(1){
 		refreshLauncherStat(&launcher, launcher.phys.t + (1<<13));
 		setLauncherLocation(Fix2Int(launcher.phys.x), Fix2Int(launcher.phys.y));
+		refreshEnemyStat(enemies, enemies[0].phys.t);
+		setEnemyLocation(0, Fix2Int(enemies[0].phys.x), Fix2Int(enemies[0].phys.y));
 		for (i=0; i < ROCKET_NUMBER_OF_ENTITY; i++){
 			if (!isRocketLaunched(rockets[i])){
 				setRocketLocation(i, Fix2Int(launcher.phys.x), Fix2Int(launcher.phys.y)-4);
@@ -111,14 +129,20 @@ void testFinal(){
 			}
 			else{
 				rocketStat = refreshRocketStat(rockets + i, rockets[i].phys.t);
-				if (rocketStat & ROCKET_HIT_GROUND){
+				if (rocketStat){
+					sprintf(msg, "Rocket number %d is not flying.\n", i);
+					print(msg);
+					if (rocketStat & ROCKET_HIT_GROUND){
 					// Booming
+					}
 					if (rocketStat & ROCKET_OUT_OF_SCREEN){
 						initRocket(rockets + i);
 						setRocketAngle(i, launcher.rocketAngle);
 					}
 				}
 				else{
+					sprintf(msg, "Rocket number %d is flying.\n", i);
+					print(msg);
 					setRocketLocation(i, Fix2Int(rockets[i].phys.x), Fix2Int(rockets[i].phys.y));
 					setRocketAngle(i, rockets[i].angle);
 				}

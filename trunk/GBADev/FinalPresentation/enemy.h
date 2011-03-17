@@ -9,7 +9,7 @@
 #define ENEMY_EFFECTIVE_RADIUS_SQUARE 100 << 16
 #define ROCKET_ANIMATION_SPEED_LEVEL 100
 #define ROCKET_SPRITE_ANIM_REFRESH_RATE 4
-
+#define ENEMY_START_COORDINATE 240
 
 typedef struct _enemytype_{
 	// the "Physics" part: location, velocity, acceleration, ...
@@ -21,13 +21,11 @@ typedef struct _enemytype_{
 } enemytype;
 
 // Procedures
-void initEnemy(enemytype *enemy);
-void moveEnemy(enemytype *enemy, s32 x0, s32 y0, s32 v0);
-void refreshEnemyStat(enemytype *enemy, s32 t); // refresh the launched rocket's status
+void initializeEnemy(enemytype *enemy);
+void refreshEnemyStat(enemytype *enemy, s32 t);
+void startEnemy(enemytype *enemy, int speed);
 
 // Function
-#define isRocketLaunched(rocket) ((rocket).phys.t > -1)
-int isRocketHit(rockettype rocket, int tx, int ty); // is rocket hit a point
-
-
+#define isEnemyKilled(enemy) ((enemy).life == 0)
+#define isEnemyWalked(enemy) ((enemy).phys.vx0 != 0)
 #endif // _enemy_h_
