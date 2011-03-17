@@ -19,6 +19,7 @@ void startEnemy(enemytype *enemy, int speed){
 	(*enemy).phys.vx0 = enemySpeed[speed];
 }
 
-void refreshEnemyStat(enemytype *enemy, s32 t){
+int refreshEnemyStat(enemytype *enemy, s32 t){
 	physCharRefresh(&((*enemy).phys), t);
+	return 0;
 }
