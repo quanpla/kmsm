@@ -7,7 +7,7 @@
 #define Real2Fix(x) ((s32)((x) * ((s32)1 << 16)))
 #define Int2Fix(x) ((x) << 16)
 #define MultiplyFix(x, y) ((((x) >> 4) * ((y) >> 12)))
-#define DivideFix(x, y) ( (  ((x)>0 && (y)>0 && (x) > (y)) || ((x)<0 && (y)<0 && -(x) > -(y)) || ((x)<0 && (y)>0 && -(x) > (y)) || ((x)>0 && (y)<0 && (x) > -(y)) ) ? ( ((x)/(y)) << 16 ) : ( (1<<16) / ((y)/(x)) )  )
+#define DivideFix(x, y) ( (x>=y) ? ( ((x)/(y)) << 16 ) : ( (1<<16) / ((y)/(x)) )  )
 #define Fix2Int(x) ((x) >> 16)
 
 typedef struct _physicalCharacteristics_{

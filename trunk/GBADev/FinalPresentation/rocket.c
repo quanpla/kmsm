@@ -1,11 +1,12 @@
 /*
 	Rocket objects
 */
+#include "../common/gba.h"
 #include "rocket.h"
 #include "physics.h"
-extern const double SIN[];
-extern const double COS[];
-extern const double RAD[];
+extern const s32 SIN[];
+extern const s32 COS[];
+extern const s32 RAD[];
 
 // Procedures
 void initRocket(rockettype *rocket){
@@ -18,7 +19,7 @@ void launchRocket(rockettype *rocket, s32 x0, s32 y0, s32 v0, s32 gravity, s32 w
 	(*rocket).angle = angle;
 } // launch it with init values
 
-void refreshRocketStat(rockettype *rocket, int t){
+void refreshRocketStat(rockettype *rocket, s32 t){
 	physCharRefresh(&((*rocket).phys), t);
 	(*rocket).angle = getOrbitTangentAngle((*rocket).phys);
 }
@@ -26,8 +27,8 @@ void refreshRocketStat(rockettype *rocket, int t){
 // Function
 
 int isRocketHit(rockettype rocket, int tx, int ty){
-	u32 dx = rocket.phys.x - Int2Fix(tx);
-	u32 dy = rocket.phys.y - Int2Fix(ty);
+	s32 dx = rocket.phys.x - Int2Fix(tx);
+	s32 dy = rocket.phys.y - Int2Fix(ty);
 	return ((MultiplyFix(dx, dx) + MultiplyFix(dy, dy)) <= ROCKET_EFFECTIVE_RADIUS_SQUARE);
 }
 

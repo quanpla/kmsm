@@ -8,6 +8,9 @@
 #define ENEMY_NUMBER_OF_ENTITY 4 // support 4 enemies
 
 
-#define GROUND_COORDINATE 240 // Y coordinate of the ground
+#define GROUND_COORDINATE 140 // Y coordinate of the ground
+
+#define LAUNCHER_LIMIT_X_LEFT Int2Fix(0)
+#define LAUNCHER_LIMIT_X_RIGHT Int2Fix(100)
 
 #endif

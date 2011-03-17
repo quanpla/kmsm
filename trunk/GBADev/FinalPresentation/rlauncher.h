@@ -3,7 +3,7 @@
 
 #define LAUNCHER_START_COORDINATE 10 // Start X coordinate of the rocket launcher
 #define FRICTION_VALUE 5 // the accelerate of friction fource
-#define LAUNCHER_SPEED;
+#define LAUNCHER_SPEED Int2Fix(5);
 #include "physics.h"
 
 typedef struct _rlaunchertype_{
