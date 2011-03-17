@@ -37,9 +37,6 @@ void physCharRefresh(physChar *phys, s32 t){
 		(*phys).vx = (*phys).vx0; + MultiplyFix((*phys).ax, (*phys).t);
 	}
 	
-	sprintf(msg, "%d -- %d\n", Fix2Int((*phys).x), Fix2Int(MultiplyFix((*phys).vx0, (*phys).t)));
-	print(msg);
-
 	(*phys).y = (*phys).y0;
 	if ((*phys).vy0)
 		(*phys).y += MultiplyFix((*phys).vy0, (*phys).t);

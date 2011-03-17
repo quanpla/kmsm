@@ -13,4 +13,7 @@
 #define LAUNCHER_LIMIT_X_LEFT Int2Fix(0)
 #define LAUNCHER_LIMIT_X_RIGHT Int2Fix(100)
 
+#define ROCKET_LIMIT_X_LEFT 0
+#define ROCKET_LIMIT_X_RIGHT Int2Fix(240)
+
 #endif

@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET GFX2GBA=D:\GBADev\gfx2gba\gfx2gba.exe
+SET GFX2GBA=D:\WorkingData\Projects\GBADev\gfx2gba\gfx2gba.exe
 SET BACKGROUNDOPTION=-pBCKGRND -fsrc
 SET SPRITEOPTION=-pSPRITES -t8 -fsrc
 

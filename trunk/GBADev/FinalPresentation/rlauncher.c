@@ -6,6 +6,7 @@
 char msg[50];
 void initializeLauncher(rlaunchertype *launcher){
 	physCharSetVector(&((*launcher).phys), Int2Fix(LAUNCHER_START_COORDINATE), Int2Fix(GROUND_COORDINATE), 0, 0, 0, 0);
+	(*launcher).rocketAngle = 300;
 }
 
 void refreshLauncherStat(rlaunchertype *launcher, s32 t){
@@ -46,4 +47,8 @@ void setLauncherStat(rlaunchertype *launcher, int direction){
 		(*launcher).phys.t = 0;
 	}
 	setLauncherDirection(direction);
+	if (direction!=0)
+		setLauncherAnimation(1);
+	else
+		setLauncherAnimation(0);
 }
