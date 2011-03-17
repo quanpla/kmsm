@@ -23,4 +23,6 @@ void physCharRefresh(physChar *phys, s32 t);
 
 int getOrbitTangentAngle(physChar);
 
+void printPhysChar(physChar phys);
+
 #endif // _physics_h_

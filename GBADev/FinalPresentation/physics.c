@@ -21,11 +21,8 @@ void physCharSetVector(physChar *phys, s32 x0, s32 y0, s32 v, u16 angle, s32 ax,
 	extern const signed long COS[];
 	physCharSet(phys, x0, y0, MultiplyFix(v,COS[angle]), MultiplyFix(v, SIN[angle]), ax, ay);
 }
-char msg[50];
-void physCharRefresh(physChar *phys, s32 t){
-	if (t==0)
-		return;
 
+void physCharRefresh(physChar *phys, s32 t){
 	(*phys).t = t;
 	
 	(*phys).x = (*phys).x0;
@@ -62,7 +59,19 @@ int getOrbitTangentAngle(physChar phys){
 		angle = (dx>=0) ? 0 : 180;
 	}
 	else{
-		int lo = 0; int hi = 0, mid = 0;;
+		int lo = 0; int hi = 0, mid = 0;
+		if (dy > 0 && dx > dy){
+			s32 cotangent = ((dx << 8) / dy) << 8;
+			lo = 1; hi = 89;
+			while (hi > lo + 1){
+				mid = lo + ((hi - lo) >> 1);
+				if (cotangent > TAN[mid])
+					lo = mid;
+				else
+					hi = mid;
+			}
+		}
+		
 		s32 tangent = DivideFix(dy, dx);
 		if (tangent < 0){
 			lo = 91; hi = 179;
@@ -84,4 +93,10 @@ int getOrbitTangentAngle(physChar phys){
 			angle += 180;
 	}
 	return angle;
+}
+
+void printPhysChar(physChar phys){
+	char msg[50];
+	sprintf(msg, "x=%d y=%d x0=%d y0=%d\nvx=%d vy=%d vx0=%d vy0=%d\nax=%d ay=%d t=%d\n", phys.x, phys.y, phys.x0, phys.y0, phys.vx, phys.vy, phys.vx0, phys.vy0, phys.ax, phys.ay, phys.t);
+	print(msg);
 }

@@ -16,4 +16,7 @@
 #define ROCKET_LIMIT_X_LEFT 0
 #define ROCKET_LIMIT_X_RIGHT Int2Fix(240)
 
+
+#define GRAVITATIONAL_ACCELERATE Int2Fix(3)
+#define WIND_SPEED 0
 #endif

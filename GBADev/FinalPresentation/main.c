@@ -18,23 +18,48 @@ enemytype enemies[ENEMY_NUMBER_OF_ENTITY];
 
 void interrupt_handler();
 
+char msg[60];
+
 int main(void){
 	REG_DISPCNT = MODE_4 | OBJ_ENABLE | OBJ_MAP_1D | BG2_ENABLE;
-	
-	REG_INTERUPT = (u32)interrupt_handler;
-	REG_P1CNT = KEY_INTERRUPT | KEY_A | KEY_B | KEY_LEFT | KEY_RIGHT | KEY_UP | KEY_DOWN | KEY_INTERRUPT_OR;
-	REG_TM0D = 41950;
-	REG_TM0CNT = TIME_ENABLE | TIME_IRQ_ENABLE | TIME_FREQUENCY_SYSTEM;
-
-	REG_IE |= INT_KEYBOARD | INT_TIMER0;
-	REG_IME = 1;
-	testFinal();
+	fireRocketAt(10, GROUND_COORDINATE, 20, 280);
+//	testFinal();
 	while(1);
 	return 0;
 }
 
-char msg[60];
 vu16 waitReload = 0;
+
+void fireRocketAt(int x, int y, int v, int angle){
+	initializeSprites();
+	initRocket(0);
+
+	launchRocket(rockets, Int2Fix(x), Int2Fix(y), Int2Fix(v), GRAVITATIONAL_ACCELERATE, WIND_SPEED, angle);
+	
+	setRocketLocation(0, Fix2Int(rockets[0].phys.x), Fix2Int(rockets[0].phys.y));
+	setRocketAngle(0, rockets[0].angle);
+	waitForVsync();
+	refreshSprites();
+	
+	int rocketStat;
+	rockets[0].phys.t += 1 << 15;
+	while(1){
+		rocketStat = refreshRocketStat(rockets, rockets[0].phys.t);
+		if (rocketStat){
+			initRocket(0);
+			launchRocket(rockets, Int2Fix(x), Int2Fix(y), Int2Fix(v), GRAVITATIONAL_ACCELERATE, WIND_SPEED, angle);
+			//printPhysChar(rockets[0].phys);
+		}
+		else{
+			rockets[0].phys.t += 1 << 15;
+			//printPhysChar(rockets[0].phys);
+		}
+		setRocketLocation(0, Fix2Int(rockets[0].phys.x), Fix2Int(rockets[0].phys.y));
+		setRocketAngle(0, rockets[0].angle);
+		waitForVsync();
+		refreshSprites();
+	}
+}
 
 void interrupt_handler() {
 	int i;
@@ -114,9 +139,18 @@ void testFinal(){
 	for (i=0; i < ENEMY_NUMBER_OF_ENTITY; i++){
 		initializeEnemy(enemies + i);
 	}
-	startEnemy(enemies, 1);
+	//startEnemy(enemies, 1);
 	
 	i = 0;
+
+	REG_INTERUPT = (u32)interrupt_handler;
+	REG_P1CNT = KEY_INTERRUPT | KEY_A | KEY_B | KEY_LEFT | KEY_RIGHT | KEY_UP | KEY_DOWN | KEY_INTERRUPT_OR;
+	REG_TM0D = 41950;
+	REG_TM0CNT = TIME_ENABLE | TIME_IRQ_ENABLE | TIME_FREQUENCY_SYSTEM;
+
+	REG_IE |= INT_KEYBOARD | INT_TIMER0;
+	REG_IME = 1;
+
 	while(1){
 		refreshLauncherStat(&launcher, launcher.phys.t + (1<<13));
 		setLauncherLocation(Fix2Int(launcher.phys.x), Fix2Int(launcher.phys.y));
@@ -130,8 +164,6 @@ void testFinal(){
 			else{
 				rocketStat = refreshRocketStat(rockets + i, rockets[i].phys.t);
 				if (rocketStat){
-					sprintf(msg, "Rocket number %d is not flying.\n", i);
-					print(msg);
 					if (rocketStat & ROCKET_HIT_GROUND){
 					// Booming
 					}
@@ -141,13 +173,13 @@ void testFinal(){
 					}
 				}
 				else{
-					sprintf(msg, "Rocket number %d is flying.\n", i);
-					print(msg);
 					setRocketLocation(i, Fix2Int(rockets[i].phys.x), Fix2Int(rockets[i].phys.y));
 					setRocketAngle(i, rockets[i].angle);
 				}
 			}
 		}
+		sprintf(msg, "%d -- %d -- %d -- %d -- %d\n", launcher.rocketAngle, rockets[0].angle, rockets[1].angle, rockets[2].angle, rockets[3].angle);
+		print(msg);
 		waitForVsync();
 		refreshSprites();
 		// process refreshing
