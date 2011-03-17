@@ -11,6 +11,8 @@
 #define ROCKET_SPRITE_ANIM_REFRESH_RATE 4
 #define ENEMY_START_COORDINATE 240
 
+#define ENEMY_STAT_HIT_LAUNCHER 1
+
 typedef struct _enemytype_{
 	// the "Physics" part: location, velocity, acceleration, ...
 	physChar phys;
@@ -22,7 +24,7 @@ typedef struct _enemytype_{
 
 // Procedures
 void initializeEnemy(enemytype *enemy);
-void refreshEnemyStat(enemytype *enemy, s32 t);
+int refreshEnemyStat(enemytype *enemy, s32 t);
 void startEnemy(enemytype *enemy, int speed);
 
 // Function
