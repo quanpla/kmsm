@@ -21,20 +21,20 @@ int main(void){
 	REG_INTERUPT = (u32)interrupt_handler;
 	REG_P1CNT = KEY_INTERRUPT | KEY_A | KEY_B | KEY_LEFT | KEY_RIGHT | KEY_UP | KEY_DOWN | KEY_INTERRUPT_OR;
 	REG_TM0D = 41950;
-	REG_TM0CNT = TIME_ENABLE | TIME_IRQ_ENABLE | TIME_FREQUENCY_256;
+	REG_TM0CNT = TIME_ENABLE | TIME_IRQ_ENABLE | TIME_FREQUENCY_SYSTEM;
 
 	REG_IE |= INT_KEYBOARD | INT_TIMER0;
 	REG_IME = 1;
-	
-	test2();
-	
+	testFinal();
 	while(1);
 	return 0;
 }
 
 char msg[60];
+vu16 waitReload = 0;
 
 void interrupt_handler() {
+	int i;
 	
 	REG_IME = 0;
 	
@@ -46,16 +46,40 @@ void interrupt_handler() {
 		else if(!(*KEYS & KEY_RIGHT)){
 			setLauncherStat(&launcher, 1);
 		}
-			
+		
+		if(!(*KEYS & KEY_A)){
+			if(waitReload == 0){
+				sprintf(msg, "key A pressed\n");
+				print(msg);
+				for (i = 0; i<ROCKET_NUMBER_OF_ENTITY; i++){
+					if (!isRocketLaunched(rockets[i])){
+						launchRocket(rockets + i, launcher.phys.x, launcher.phys.y, Int2Fix(10), Int2Fix(1), 0, launcher.rocketAngle);
+						waitReload = 100;
+						break;
+					}
+				}
+			}
+		}
+	
 		REG_IF |= INT_KEYBOARD;
 
 	}
-	else if (REG_IF & INT_TIMER0) 
+	else if (REG_IF & INT_TIMER0)
 	{
 		if((*KEYS & KEY_RIGHT) && (*KEYS & KEY_LEFT)){
 			setLauncherStat(&launcher, 0);
 		}
-		launcher.phys.t += (1<<13);
+		if (launcher.phys.vx)
+			launcher.phys.t += (1<<10);
+		for (i = 0; i<ROCKET_NUMBER_OF_ENTITY; i++){
+			if (isRocketLaunched(rockets[i])){
+				rockets[i].phys.t += (1<<10);
+			}
+		}
+		
+		if (waitReload)
+			waitReload--;
+		
 		REG_IF |= INT_TIMER1;
 	}
 	
@@ -71,18 +95,33 @@ void testFinal(){
 	refreshSprites();
 	
 	int i;
-	setRocketAngle(0, 300);
+	int rocketStat;
+	for (i=0; i < ROCKET_NUMBER_OF_ENTITY; i++){
+		initRocket(rockets + i);
+		setRocketAngle(i, launcher.rocketAngle);
+	}
+	i = 0;
 	while(1){
 		refreshLauncherStat(&launcher, launcher.phys.t + (1<<13));
 		setLauncherLocation(Fix2Int(launcher.phys.x), Fix2Int(launcher.phys.y));
 		for (i=0; i < ROCKET_NUMBER_OF_ENTITY; i++){
 			if (!isRocketLaunched(rockets[i])){
 				setRocketLocation(i, Fix2Int(launcher.phys.x), Fix2Int(launcher.phys.y)-4);
+				setRocketAngle(i, launcher.rocketAngle);
 			}
 			else{
-				refreshRocketStat(rockets, rockets[i].phys.t);
-				setRocketLocation(i, Fix2Int(rockets[i].phys.x), Fix2Int(rockets[i].phys.y));
-				setRocketAngle(i, rockets[i].angle);
+				rocketStat = refreshRocketStat(rockets + i, rockets[i].phys.t);
+				if (rocketStat & ROCKET_HIT_GROUND){
+					// Booming
+					if (rocketStat & ROCKET_OUT_OF_SCREEN){
+						initRocket(rockets + i);
+						setRocketAngle(i, launcher.rocketAngle);
+					}
+				}
+				else{
+					setRocketLocation(i, Fix2Int(rockets[i].phys.x), Fix2Int(rockets[i].phys.y));
+					setRocketAngle(i, rockets[i].angle);
+				}
 			}
 		}
 		waitForVsync();

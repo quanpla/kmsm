@@ -8,6 +8,7 @@
 
 typedef struct _rlaunchertype_{
 	physChar phys;
+	int rocketAngle;
 	int frictionMode; // only the fraction slow it down
 	int curFrame; // show off, prepare for the frame number of animation
 } rlaunchertype;
