@@ -27,7 +27,7 @@ int refreshRocketStat(rockettype *rocket, s32 t){
 	(*rocket).angle = getOrbitTangentAngle((*rocket).phys);
 	if ((*rocket).phys.x > ROCKET_LIMIT_X_RIGHT || (*rocket).phys.x < ROCKET_LIMIT_X_LEFT || (*rocket).phys.y >= Int2Fix(GROUND_COORDINATE))
 		ret |= ROCKET_OUT_OF_SCREEN;
-	if ((*rocket).phys.y >= GROUND_COORDINATE)
+	if ((*rocket).phys.y >= Int2Fix(GROUND_COORDINATE))
 		ret |= ROCKET_HIT_GROUND;
 	return ret;
 }
