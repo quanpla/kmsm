@@ -27,7 +27,7 @@ typedef struct _rockettype_{
 // Procedures
 void initRocket(rockettype *rocket);
 void launchRocket(rockettype *rocket, s32 x0, s32 y0, s32 v0, s32 gravity, s32 windForce, int angle); // launch it with init values
-void refreshRocketStat(rockettype *rocket, int t); // refresh the launched rocket's status
+void refreshRocketStat(rockettype *rocket, s32 t); // refresh the launched rocket's status
 
 // Function
 #define isRocketLaunched(rocket) ((rocket).phys.t > -1)

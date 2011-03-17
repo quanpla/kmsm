@@ -23,6 +23,7 @@ void setRocketAngle(int rocketId, int angle);
 
 void setLauncherAnimation(int frameId);
 void setLauncherLocation(int x, int y);
+void setLauncherDirection(int direction);
 
 void setEnemyAnimation(int enemyId, int frameId);
 void setEnemyLocation(int enemyId, int x, int y);

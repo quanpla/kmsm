@@ -11,19 +11,19 @@
 #define ROCKET_SPRITE_ANIM_REFRESH_RATE 4
 
 
-typedef struct _rockettype_{
+typedef struct _enemytype_{
 	// the "Physics" part: location, velocity, acceleration, ...
 	physChar phys;
 	// the show up part: animation num, etc.
-	int angle;
 	int curFrame;
 	int waitForNextFrame;
-} rockettype;
+	int life;
+} enemytype;
 
 // Procedures
-void initRocket(rockettype *rocket);
-void launchRocket(rockettype *rocket, float x0, float y0, float v0, float gravity, float windForce, int angle); // launch it with init values
-void refreshRocketStat(rockettype *rocket, int t); // refresh the launched rocket's status
+void initEnemy(enemytype *enemy);
+void moveEnemy(enemytype *enemy, s32 x0, s32 y0, s32 v0);
+void refreshEnemyStat(enemytype *enemy, s32 t); // refresh the launched rocket's status
 
 // Function
 #define isRocketLaunched(rocket) ((rocket).phys.t > -1)
