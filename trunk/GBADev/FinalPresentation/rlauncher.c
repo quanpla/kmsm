@@ -2,11 +2,16 @@
 #include "environment.h"
 #include "rlauncher.h"
 #include "utils.h"
+#include "../common/gba.h"
 
 char msg[50];
+
+#define ROCKET_VELOCITY_INDICATOR_COLOR 15
+
 void initializeLauncher(rlaunchertype *launcher){
 	physCharSetVector(&((*launcher).phys), Int2Fix(LAUNCHER_START_COORDINATE), Int2Fix(GROUND_COORDINATE), 0, 0, 0, 0);
 	(*launcher).rocketAngle = 300;
+	setLauncherRocketVelocity(launcher, ROCKET_SPEED_MIN);
 }
 
 void refreshLauncherStat(rlaunchertype *launcher, s32 t){
@@ -51,4 +56,9 @@ void setLauncherStat(rlaunchertype *launcher, int direction){
 		setLauncherAnimation(1);
 	else
 		setLauncherAnimation(0);
+}
+
+void setLauncherRocketVelocity(rlaunchertype *launcher, s32 v){
+	(*launcher).rocketVelocity = v;
+	BGPaletteMem[ROCKET_VELOCITY_INDICATOR_COLOR] = Fix2Int(v);
 }

@@ -49,8 +49,19 @@ int getOrbitTangentAngle(physChar phys){
 	extern const signed long TAN[];
 
 	int angle;
-	s32 dx = phys.vx0 + (phys.ax >> 1) + MultiplyFix(phys.ax, phys.t);
-	s32 dy = phys.vy0 + (phys.ay >> 1) + MultiplyFix(phys.ay, phys.t);
+	s32 dx = phys.vx0;
+	if(phys.ax){
+		dx += (phys.ax >> 1);
+		if(phys.t)
+			dx += MultiplyFix(phys.ax, phys.t);
+	}
+	
+	s32 dy = phys.vy0;
+	if(phys.ay){
+		dy += (phys.ay >> 1);
+		if(phys.t)
+			dy += MultiplyFix(phys.ay, phys.t);
+	}
 	
 	if( dx==0 ){
 		angle = (dy>=0) ? 90 : 270;
@@ -59,38 +70,39 @@ int getOrbitTangentAngle(physChar phys){
 		angle = (dx>=0) ? 0 : 180;
 	}
 	else{
-		int lo = 0; int hi = 0, mid = 0;
-		if (dy > 0 && dx > dy){
-			s32 cotangent = ((dx << 8) / dy) << 8;
-			lo = 1; hi = 89;
-			while (hi > lo + 1){
-				mid = lo + ((hi - lo) >> 1);
-				if (cotangent > TAN[mid])
-					lo = mid;
-				else
-					hi = mid;
-			}
-		}
+		int isTan = 1;
+		if (abs(dy) < abs(dx))
+			isTan = 0;
 		
-		s32 tangent = DivideFix(dy, dx);
-		if (tangent < 0){
-			lo = 91; hi = 179;
-		}
-		else{
-			lo = 0; hi = 89;
-		}
-		
+		s32 val = (isTan) ? DivideFixNoCompare(abs(dy), abs(dx)) : DivideFixNoCompare(abs(dx), abs(dy));
+		int lo = 43; int hi = 89, mid = 66;
 		while (hi > lo + 1){
 			mid = lo + ((hi - lo) >> 1);
-			if (tangent > TAN[mid])
+			if (val > TAN[mid])
 				lo = mid;
 			else
 				hi = mid;
 		}
-		
-		angle = lo;
-		if (dy < 0)
-			angle += 180;
+		if (isTan){
+			if (dx > 0 && dy > 0)
+				angle = mid;
+			else if(dx < 0 && dy > 0)
+				angle = 180 - mid;
+			else if(dx < 0 && dy < 0)
+				angle = mid + 180;
+			else
+				angle = 360 - mid;
+		}
+		else{
+			if (dx > 0 && dy > 0)
+				angle = 90 - mid;
+			else if(dx < 0 && dy > 0)
+				angle = mid + 90;
+			else if(dx < 0 && dy < 0)
+				angle = 270 - mid;
+			else
+				angle = 270 + mid;
+		}
 	}
 	return angle;
 }

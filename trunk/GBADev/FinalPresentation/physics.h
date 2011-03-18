@@ -8,6 +8,7 @@
 #define Int2Fix(x) ((x) << 16)
 #define MultiplyFix(x, y) ((((x) >> 4) * ((y) >> 12)))
 #define DivideFix(x, y) ( (x>=y) ? ( ((x)/(y)) << 16 ) : ( (1<<16) / ((y)/(x)) )  )
+#define DivideFixNoCompare(x, y) ( ((x << 8)/(y)) << 8 )
 #define Fix2Int(x) ((x) >> 16)
 
 typedef struct _physicalCharacteristics_{

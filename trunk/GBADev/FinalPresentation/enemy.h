@@ -6,9 +6,7 @@
 #include "../common/gba.h"
 #include "physics.h"
 
-#define ENEMY_EFFECTIVE_RADIUS_SQUARE 100 << 16
-#define ROCKET_ANIMATION_SPEED_LEVEL 100
-#define ROCKET_SPRITE_ANIM_REFRESH_RATE 4
+#define ENEMY_EFFECTIVE_RADIUS_SQUARE 10 << 16
 #define ENEMY_START_COORDINATE 240
 
 #define ENEMY_STAT_HIT_LAUNCHER 1
@@ -25,7 +23,7 @@ typedef struct _enemytype_{
 // Procedures
 void initializeEnemy(enemytype *enemy);
 int refreshEnemyStat(enemytype *enemy, s32 t);
-void startEnemy(enemytype *enemy, int speed);
+void startEnemy(enemytype *enemy);
 
 // Function
 #define isEnemyKilled(enemy) ((enemy).life == 0)

@@ -10,6 +10,7 @@ extern const s32 SIN[];
 extern const s32 COS[];
 extern const s32 RAD[];
 
+
 // Procedures
 void initRocket(rockettype *rocket){
 	(*rocket).phys.t = -1;
@@ -23,12 +24,14 @@ void launchRocket(rockettype *rocket, s32 x0, s32 y0, s32 v0, s32 gravity, s32 w
 
 int refreshRocketStat(rockettype *rocket, s32 t){
 	int ret = 0;
-	physCharRefresh(&((*rocket).phys), t);
-	(*rocket).angle = getOrbitTangentAngle((*rocket).phys);
-	if ((*rocket).phys.x > ROCKET_LIMIT_X_RIGHT || (*rocket).phys.x < ROCKET_LIMIT_X_LEFT || (*rocket).phys.y >= Int2Fix(GROUND_COORDINATE))
-		ret |= ROCKET_OUT_OF_SCREEN;
-	if ((*rocket).phys.y >= Int2Fix(GROUND_COORDINATE))
-		ret |= ROCKET_HIT_GROUND;
+	if(t){
+		physCharRefresh(&((*rocket).phys), t);
+		(*rocket).angle = getOrbitTangentAngle((*rocket).phys);
+		if ((*rocket).phys.x > ROCKET_LIMIT_X_RIGHT || (*rocket).phys.x < ROCKET_LIMIT_X_LEFT || (*rocket).phys.y >= Int2Fix(GROUND_COORDINATE))
+			ret |= ROCKET_OUT_OF_SCREEN;
+		if ((*rocket).phys.y >= Int2Fix(GROUND_COORDINATE))
+			ret |= ROCKET_HIT_GROUND;
+	}
 	return ret;
 }
 
