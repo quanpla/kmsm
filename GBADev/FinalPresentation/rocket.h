@@ -10,7 +10,7 @@
 #include "../common/gba.h"
 #include "physics.h"
 
-#define ROCKET_EFFECTIVE_RADIUS_SQUARE 100 << 16
+#define ROCKET_EFFECTIVE_RADIUS_SQUARE 10 << 16
 #define ROCKET_ANIMATION_SPEED_LEVEL 100
 #define ROCKET_SPRITE_ANIM_REFRESH_RATE 4
 
