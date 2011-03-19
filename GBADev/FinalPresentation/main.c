@@ -4,7 +4,6 @@
 #include "../common/interrupt.h"
 #include "../common/timers.h"
 
-#include <stdlib.h>
 
 #include "environment.h"
 #include "physics.h"
@@ -31,8 +30,6 @@ vu8 LauncherGotHit = 0;
 
 int main(void){
 	REG_DISPCNT = MODE_4 | OBJ_ENABLE | OBJ_MAP_1D | BG2_ENABLE;
-	
-	test7();
 	
 	while(1){
 		LauncherGotHit = 0;
@@ -172,6 +169,9 @@ void testFinal(){
 		initializeEnemy(enemies + i);
 		startEnemy(enemies + i);
 	}
+	for (i=0; i < ENEMY_NUMBER_OF_ENTITY; i++){
+		enemies[i].status = 0;
+	}
 	
 	i = 0;
 
@@ -232,35 +232,14 @@ void testFinal(){
 
 void GameOverScreen(void){
 	setBG_GameOver();
-	// draw the launcher flying around
-	launcher.phys.ax = Int2Fix(rand()% 5);
-	launcher.phys.ay = Int2Fix(rand()% 5);
-	launcher.phys.t = 0;
-	launcher.phys.x0 = launcher.phys.x;
-	launcher.phys.y0 = launcher.phys.y;
-	launcher.phys.vx0 = launcher.phys.vx;
-	launcher.phys.vy0 = launcher.phys.vy;
-	while(*KEYS & KEY_START){
-		if(rand()%10000 < 2){
-			launcher.phys.ax = Int2Fix(rand()% 5);
-			launcher.phys.ay = Int2Fix(rand()% 5);
-			launcher.phys.t = 0;
-			launcher.phys.x0 = launcher.phys.x;
-			launcher.phys.y0 = launcher.phys.y;
-			launcher.phys.vx0 = launcher.phys.vx;
-			launcher.phys.vy0 = launcher.phys.vy;
-		}
-		refreshLauncherStat(&launcher, launcher.phys.t + (1<<13));
-		if(launcher.phys.x > 240)
-			launcher.phys.x = 16;
-		else if(launcher.phys.x < 16)
-			launcher.phys.x = 240;
-		if(launcher.phys.y > GROUND_COORDINATE)
-			launcher.phys.y = 16;
-		else if(launcher.phys.y < 16)
-			launcher.phys.y = GROUND_COORDINATE;
-		setLauncherLocation(Fix2Int(launcher.phys.x), Fix2Int(launcher.phys.y));
+	//REG_IME = 0;
+	int i;
+	for(i==0 ; i < 128; i++){
+		hideSprite(i);
 	}
+	waitForVsync();
+	refreshSprites();
+	while(*KEYS & KEY_START);
 }
 
 void GameStartScreen(void){
@@ -283,44 +262,4 @@ void GameStartScreen(void){
 	initializeLauncher(&launcher);
 	waitForVsync();
 	refreshSprites();
-}
-
-
-
-
-void test6(){
-	initializeSprites();
-	initRocket(0);
-	initRocket(1);
-	initRocket(2);
-	initRocket(3);
-	
-	launchRocket(rockets, Int2Fix(10), Int2Fix(10), Int2Fix(10), GRAVITATIONAL_ACCELERATE, WIND_SPEED, 45);
-	launchRocket(rockets + 1, Int2Fix(50), Int2Fix(10), Int2Fix(10), GRAVITATIONAL_ACCELERATE, WIND_SPEED, 135);
-	launchRocket(rockets + 2, Int2Fix(10), Int2Fix(50), Int2Fix(10), GRAVITATIONAL_ACCELERATE, WIND_SPEED, 225);
-	launchRocket(rockets + 3, Int2Fix(50), Int2Fix(50), Int2Fix(10), GRAVITATIONAL_ACCELERATE, WIND_SPEED, 315);
-	
-	setRocketLocation(0, Fix2Int(rockets[0].phys.x), Fix2Int(rockets[0].phys.y));
-	setRocketAngle(0, rockets[0].angle);
-	setRocketLocation(1, Fix2Int(rockets[1].phys.x), Fix2Int(rockets[1].phys.y));
-	setRocketAngle(1, rockets[1].angle);
-	setRocketLocation(2, Fix2Int(rockets[2].phys.x), Fix2Int(rockets[2].phys.y));
-	setRocketAngle(2, rockets[2].angle);
-	setRocketLocation(3, Fix2Int(rockets[3].phys.x), Fix2Int(rockets[3].phys.y));
-	setRocketAngle(3, rockets[3].angle);
-	
-	refreshSprites();
-}
-
-void test7(void){
-	setBG_Start();
-	initializeSprites();
-	refreshSprites();
-	waitForVsync();
-	setBG_Game();
-	setLauncherLocation(Fix2Int(launcher.phys.x), Fix2Int(launcher.phys.y));
-	initializeLauncher(&launcher);
-	waitForVsync();
-	refreshSprites();
-	GameOverScreen();
 }

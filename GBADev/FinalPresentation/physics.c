@@ -26,12 +26,11 @@ void physCharRefresh(physChar *phys, s32 t){
 	(*phys).t = t;
 	
 	(*phys).x = (*phys).x0;
-
 	if ((*phys).vx0)
 		(*phys).x += MultiplyFix((*phys).vx0, (*phys).t);
 	if ((*phys).ax){
 		(*phys).x += (MultiplyFix((*phys).ax, MultiplyFix((*phys).t, (*phys).t)) >> 1);
-		(*phys).vx = (*phys).vx0; + MultiplyFix((*phys).ax, (*phys).t);
+		(*phys).vx = (*phys).vx0 + MultiplyFix((*phys).ax, (*phys).t);
 	}
 	
 	(*phys).y = (*phys).y0;
@@ -109,6 +108,6 @@ int getOrbitTangentAngle(physChar phys){
 
 void printPhysChar(physChar phys){
 	char msg[50];
-	sprintf(msg, "x=%d y=%d x0=%d y0=%d\nvx=%d vy=%d vx0=%d vy0=%d\nax=%d ay=%d t=%d\n", phys.x, phys.y, phys.x0, phys.y0, phys.vx, phys.vy, phys.vx0, phys.vy0, phys.ax, phys.ay, phys.t);
+	sprintf(msg, "x=%d y=%d x0=%d y0=%d\nvx=%d vy=%d vx0=%d vy0=%d\nax=%d ay=%d t=%d\n", Fix2Int(phys.x), Fix2Int(phys.y), Fix2Int(phys.x0), Fix2Int(phys.y0), Fix2Int(phys.vx), Fix2Int(phys.vy), Fix2Int(phys.vx0), Fix2Int(phys.vy0), Fix2Int(phys.ax), Fix2Int(phys.ay), Fix2Int(phys.t));
 	print(msg);
 }

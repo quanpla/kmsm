@@ -17,7 +17,7 @@ void initializeLauncher(rlaunchertype *launcher){
 }
 
 void refreshLauncherStat(rlaunchertype *launcher, s32 t){
-	if ((*launcher).phys.vx == 0)
+	if ((*launcher).phys.vx == 0 && (*launcher).phys.vy == 0 && (*launcher).phys.ax == 0 && (*launcher).phys.ay == 0)
 		return;
 	physCharRefresh(&((*launcher).phys), t);
 	if ((*launcher).phys.x<LAUNCHER_LIMIT_X_LEFT){
