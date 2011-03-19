@@ -12,6 +12,8 @@ void initializeLauncher(rlaunchertype *launcher){
 	physCharSetVector(&((*launcher).phys), Int2Fix(LAUNCHER_START_COORDINATE), Int2Fix(GROUND_COORDINATE), 0, 0, 0, 0);
 	(*launcher).rocketAngle = 300;
 	setLauncherRocketVelocity(launcher, ROCKET_SPEED_MIN);
+	(*launcher).curFrame = 0;
+	(*launcher).waitForNextFrame = 0;
 }
 
 void refreshLauncherStat(rlaunchertype *launcher, s32 t){

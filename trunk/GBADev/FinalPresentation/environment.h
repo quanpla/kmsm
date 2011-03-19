@@ -20,16 +20,19 @@
 #define ROCKET_SPEED_MIN Int2Fix(10)
 #define ROCKET_SPEED_MAX Int2Fix(31)
 #define ROCKET_SPEED_STEP Int2Fix(1)
-
 #define ROCKET_LIMIT_Y_TOP -16
 
 #define OBJECT_TIME_UNIT (1 << 10)
 
-#define GRAVITATIONAL_ACCELERATE Int2Fix(3)
+#define GRAVITATIONAL_ACCELERATE (7 << 15)
 #define WIND_SPEED 0
 
 #define KEYPAD_SENSITIVITY_HIGH 5
 #define KEYPAD_SENSITIVITY_MID 50
 #define KEYPAD_SENSITIVITY_LOW 100
+
+void setBG_Game(void);
+void setBG_Start(void);
+void setBG_GameOver(void);
 
 #endif
