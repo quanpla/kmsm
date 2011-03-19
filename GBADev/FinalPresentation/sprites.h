@@ -22,10 +22,12 @@ void setRocketLocation(int rocketId, int x, int y);
 void setRocketAngle(int rocketId, int angle);
 
 void setLauncherAnimation(int frameId);
+void setLauncherDieLocation(int x, int y);
 void setLauncherLocation(int x, int y);
 void setLauncherDirection(int direction);
 
 void setEnemyAnimation(int enemyId, int frameId);
+void setEnemyDieAnimation(int enemyId, int frameId);
 void setEnemyLocation(int enemyId, int x, int y);
 
 #endif // _sprite_h_

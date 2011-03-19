@@ -6,7 +6,7 @@ AS=arm-agb-elf-as
 AR=arm-agb-elf-ar
 INSTALL=cp
 
-OLIST = main.o utils.o rlauncher.o rocket.o enemy.o physics.o sprites.o
+OLIST = main.o utils.o rlauncher.o rocket.o enemy.o physics.o sprites.o environment.o
 
 all: Presentation.gba
 
